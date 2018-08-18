@@ -1,2 +1,2 @@
 # simulados-front
-Frontend da solução "Simulados da OAB"
+Frontend de administradores da solução "Simulados da OAB"
