@@ -1,0 +1,21 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background: $body-background;
+  font-family: $font-family;
+  letter-spacing: -.15px;
+  line-height: 1.2;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+html,
+main,
+#root {
+  height: 100%;
+}
