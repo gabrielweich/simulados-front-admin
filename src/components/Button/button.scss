@@ -1,0 +1,75 @@
+.button {
+  font-size: 1rem;
+  background: $primary;
+  color: #fff;
+  transition: all 75ms ease-in-out;
+  line-height: 30px;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0 16px;
+  outline: 0;
+  position: relative;
+
+  &:focus {
+    box-shadow: 0 0 0 1px #0576b9, 0 0 0 4px rgba(45,158,224,.3);
+  }
+
+  &:not([disabled]):not(:focus):hover {
+    box-shadow: inset 0 0 0 1px rgba(44,45,48,.3), 0 1px 4px rgba(44,45,48,.2);
+  }
+
+  &--ghost {
+    background: #fff;
+    color: inherit;
+    box-shadow: inset 0 0 0 1px rgba(44,45,48,.3);
+  }
+
+  &--with-icon:not(.button--empty) {
+    padding-left: 32px;
+  }
+
+  &[disabled] {
+    opacity: .8;
+    background: #eee;
+    color: inherit;
+    cursor: auto;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 2px 8px;
+  }
+
+  &--empty &__icon {
+    left: unset;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    margin: 2px 0;
+  }
+
+  &--block {
+    width: 100%;
+    display: block;
+  }
+
+  &--l {
+    line-height: 40px;
+  }
+}
