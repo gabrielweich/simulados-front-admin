@@ -34,6 +34,8 @@ const InputWithIcon = props => (
 const shouldHaveIcon = props =>
   'icon' in props || props.type === 'search'
 
+export const TextArea = props => <Input as="textarea" {...props} />
+
 export default props => shouldHaveIcon(props)
   ? <InputWithIcon {...props} />
   : <Input {...props} />

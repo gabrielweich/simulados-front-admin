@@ -1,5 +1,3 @@
-import './stylesheets/main.scss'
-
 import registerServiceWorker from './registerServiceWorker'
 
 import React from 'react'
@@ -18,7 +16,9 @@ import rootReducer from 'store'
 
 import App from './App'
 import Examples from 'scenes/Examples'
+import CreateQuestion from 'scenes/CreateQuestion'
 import ProtectedRoute from 'containers/ProtectedRoute'
+import './stylesheets/main.scss'
 
 const history = createBrowserHistory()
 const enhancedCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -40,6 +40,7 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route exact path="/" component={Examples} />
+          <Route path="/create-question" component={CreateQuestion} />
           <ProtectedRoute path="/protected" component={() => 'Protected content'} />
           <Route render={() => 404} />
         </Switch>
