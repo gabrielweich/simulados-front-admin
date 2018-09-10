@@ -11,6 +11,7 @@ const Input = ({
   value,
   placeholder,
   type,
+  name,
   block,
 }) => (
   <T
@@ -19,6 +20,7 @@ const Input = ({
     value={value}
     placeholder={placeholder}
     type={type}
+    name={name}
   />
 )
 
