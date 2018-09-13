@@ -6,6 +6,11 @@ import Input, {TextArea} from 'components/Input'
 import Button from 'components/Button'
 import RadioGroup from 'components/RadioGroup'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { saveQuestion } from 'store/question/actions'
+
 
 class CreateQuestion extends React.Component {
   constructor(props){
@@ -103,7 +108,7 @@ handleFormChange = event => {
               ]}
             />
             <footer className="flex justify-end">
-              <Button>Salvar questão</Button>
+              <Button onClick={() => this.props.saveQuestion(this.state)}>Salvar questão</Button>
             </footer>
         </Card>
       </Container>
@@ -111,4 +116,9 @@ handleFormChange = event => {
   }
 }
 
-export default CreateQuestion
+export default connect(null,
+  dispatch => bindActionCreators({
+    saveQuestion,
+  }, dispatch)
+)(CreateQuestion)
+
