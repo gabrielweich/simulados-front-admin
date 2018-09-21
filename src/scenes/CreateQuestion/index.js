@@ -33,7 +33,7 @@ handleFormChange = event => {
 
   render() {
     return (
-      <Container>
+      <div>
         <h1>Elaborar Questões</h1>
         <Card>
             <Field
@@ -111,7 +111,7 @@ handleFormChange = event => {
               <Button onClick={() => this.props.saveQuestion(this.state)}>Salvar questão</Button>
             </footer>
         </Card>
-      </Container>
+      </div>
     )
   }
 }
@@ -121,4 +121,3 @@ export default connect(null,
     saveQuestion,
   }, dispatch)
 )(CreateQuestion)
-

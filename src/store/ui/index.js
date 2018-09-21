@@ -4,6 +4,7 @@ import { growlAdded, growlRemoved, } from './actions'
 
 const initialState = {
   growls: [],
+  sidebarOpen: true,
 }
 
 const hideAllGrowls = growls => growls.map(
@@ -31,5 +32,6 @@ const reducer = handleActions({
 }, initialState)
 
 export const getGrowls = state => state.ui.growls
+export const isSidebarOpen = state => state.ui.sidebarOpen
 
 export default reducer

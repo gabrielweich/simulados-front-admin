@@ -17,6 +17,7 @@ import rootReducer from 'store'
 import App from './App'
 import Examples from 'scenes/Examples'
 import CreateQuestion from 'scenes/CreateQuestion'
+import Layout from 'components/Layout'
 import ProtectedRoute from 'containers/ProtectedRoute'
 import './stylesheets/main.scss'
 
@@ -38,12 +39,13 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <App>
-        <Switch>
-          <Route exact path="/" component={Examples} />
-          <Route path="/create-question" component={CreateQuestion} />
-          <ProtectedRoute path="/protected" component={() => 'Protected content'} />
-          <Route render={() => 404} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Examples} />
+            <Route path="/nova" component={CreateQuestion} />
+            <Route render={() => 404} />
+          </Switch>
+        </Layout>
       </App>
     </ConnectedRouter>
   </Provider>,
