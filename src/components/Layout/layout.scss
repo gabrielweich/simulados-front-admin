@@ -2,10 +2,24 @@
   display: flex;
 
   &__container {
+    transform: translateX(240px);
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     min-width: 0;
     min-height: 0;
+    max-width: calc(100vw - 240px);
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__header {
+    padding: 0 1rem;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 }

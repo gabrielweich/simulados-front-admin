@@ -1,6 +1,7 @@
 @import '~stylesheets/utilities/breakpoints';
 
 .sidebar {
+  position: fixed;
   width: 0;
   transform: translate3d(-210px, 0, 0);
   box-shadow: rgba(0, 0, 0, 0.04) -1px 0px 2px inset;
