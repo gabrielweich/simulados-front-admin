@@ -7,7 +7,7 @@ import { isSidebarOpen } from 'store/ui'
 
 import Logo from 'components/Logo'
 import Button from 'components/Button'
-import {Link} from 'react-router-dom'
+import Link from 'components/Link'
 
 import './sidebar.scss'
 
