@@ -34,8 +34,7 @@ handleFormChange = event => {
   render() {
     return (
       <div>
-        <h1>Elaborar Questões</h1>
-        <Card>
+        <h1>Nova Questão</h1>
             <Field
               id="statement"
               value={this.state.statement}
@@ -110,7 +109,6 @@ handleFormChange = event => {
             <footer className="flex justify-end">
               <Button onClick={() => this.props.saveQuestion(this.state)}>Salvar questão</Button>
             </footer>
-        </Card>
       </div>
     )
   }
