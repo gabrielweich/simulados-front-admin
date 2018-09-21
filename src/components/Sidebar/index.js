@@ -52,9 +52,10 @@ const Sidebar = ({ currentRoute = routes[0], open, logoff }) => (
           )
         )}
       </nav>
-      <div className="sidebar-item">
-        <Button onClick={logoff}>Logoff</Button>
-      </div>
+      <footer className="sidebar-item sidebar__footer">
+        <span>usuário</span>
+        <Button size="sm" ghost onClick={logoff}>Sair</Button>
+      </footer>
     </section>
   </aside>
 )
