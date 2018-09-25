@@ -40,7 +40,11 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
+<<<<<<< HEAD
 const DEFAULT_PORT = 4000;
+=======
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3001;
+>>>>>>> implementando tela de login
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {
@@ -92,8 +96,8 @@ choosePort(HOST, DEFAULT_PORT)
       openBrowser(urls.localUrlForBrowser);
     });
 
-    ['SIGINT', 'SIGTERM'].forEach(function(sig) {
-      process.on(sig, function() {
+    ['SIGINT', 'SIGTERM'].forEach(function (sig) {
+      process.on(sig, function () {
         devServer.close();
         process.exit();
       });

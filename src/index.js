@@ -18,6 +18,7 @@ import App from './App'
 import Examples from 'scenes/Examples'
 import CreateQuestion from 'scenes/CreateQuestion'
 import Layout from 'components/Layout'
+import Login from 'scenes/Login'
 import ProtectedRoute from 'containers/ProtectedRoute'
 import './stylesheets/main.scss'
 
@@ -41,8 +42,10 @@ ReactDOM.render(
       <Switch>
         <App>
           <Layout>
-            <Route exact path="/" component={Examples} />
+            <Route exact path="/examples" component={Examples} />
             <Route path="/nova" component={CreateQuestion} />
+            <Route path="/" component={Login} />
+            <ProtectedRoute path="/protected" component={() => 'Protected content'} />
             <Route render={() => 404} />
           </Layout>
         </App>

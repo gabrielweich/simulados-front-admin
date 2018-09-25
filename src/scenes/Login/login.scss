@@ -1,0 +1,23 @@
+.login__inputcontainer {
+    margin: 50px 34% 34%;
+  }
+  
+  .login__input {
+    margin-bottom: 20px;
+  }
+  
+  .login__button {
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 720px) {
+    .login__inputcontainer {
+      margin: 50px 20% 20%;
+    }
+  
+    .login__link {
+      font-size: 13px;
+    }
+  }
