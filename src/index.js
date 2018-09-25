@@ -38,15 +38,15 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App>
-        <Layout>
-          <Switch>
+      <Switch>
+        <App>
+          <Layout>
             <Route exact path="/" component={Examples} />
             <Route path="/nova" component={CreateQuestion} />
             <Route render={() => 404} />
-          </Switch>
-        </Layout>
-      </App>
+          </Layout>
+        </App>
+      </Switch>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),

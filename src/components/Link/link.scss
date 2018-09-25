@@ -1,11 +1,5 @@
 .link {
   text-decoration: none;
   cursor: pointer;
-  transition: background 140ms ease-in;
   outline: 0;
-
-  &:focus,
-  &:hover {
-    background: rgba(58, 56, 52, 0.08);
-  }
 }

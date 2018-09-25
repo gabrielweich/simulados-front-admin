@@ -15,7 +15,7 @@ const routes = [
   {
     icon: '📖',
     title: 'Minhas questões',
-    path: '/',
+    path: '/minhas-questoes',
   },
   {
     icon: '📝',
@@ -30,7 +30,7 @@ const routes = [
 ]
 const userLoggedOff = () => ({})
 
-const Sidebar = ({ currentRoute = routes[0], open, logoff }) => (
+const Sidebar = ({ path = '/', open, logoff }) => (
   <aside className={cn('sidebar', open && 'sidebar--open')}>
     <section className="sidebar__inner">
       <div className="sidebar-item">
@@ -44,7 +44,8 @@ const Sidebar = ({ currentRoute = routes[0], open, logoff }) => (
               to={route.path}
               className={cn(
                 'sidebar-item',
-                route === currentRoute && 'sidebar-item--active'
+                path.startsWith(route.path)&& 'sidebar-item--active',
+                'clickable'
               )}
             >
               {route.icon} {route.title}
@@ -62,7 +63,7 @@ const Sidebar = ({ currentRoute = routes[0], open, logoff }) => (
 
 export default
   connect(
-    state => ({ open: isSidebarOpen(state) }),
+    state => ({ path: state.router.location.pathname, open: isSidebarOpen(state) }),
     dispatch => bindActionCreators({ logoff: userLoggedOff }, dispatch)
   )
 (Sidebar)

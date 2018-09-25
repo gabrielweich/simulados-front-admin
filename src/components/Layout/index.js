@@ -16,8 +16,8 @@ const Layout = ({ children, toggleSidebar }) => (
       <header className="layout__header">
         <Icon
           name="menu"
-          width="24"
-          height="24"
+          width={24}
+          height={24}
           onClick={toggleSidebar}
         />
       </header>
@@ -30,7 +30,7 @@ const Layout = ({ children, toggleSidebar }) => (
 
 export default
   connect(
-    null,
+    state => ({ router: state.router }),
     dispatch => bindActionCreators({ toggleSidebar }, dispatch)
   )
 (Layout)
