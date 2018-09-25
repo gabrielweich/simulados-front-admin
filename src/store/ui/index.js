@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 
-import { growlAdded, growlRemoved, } from './actions'
+import { growlAdded, growlRemoved, openSidebar, closeSidebar, toggleSidebar } from './actions'
 
 const initialState = {
   growls: [],
@@ -17,6 +17,11 @@ const hideGrowl = (target, growls) => growls.map(
     : g
 )
 
+const setSidebarOpen = to => state => ({
+  ...state,
+  sidebarOpen: to
+})
+
 const reducer = handleActions({
   [growlAdded]: (state, action) => ({
     ...state,
@@ -29,6 +34,9 @@ const reducer = handleActions({
     ...state,
     growls: hideGrowl(action.payload, state.growls),
   }),
+  [openSidebar]: setSidebarOpen(true),
+  [closeSidebar]: setSidebarOpen(false),
+  [toggleSidebar]: state => setSidebarOpen(!state.sidebarOpen)(state),
 }, initialState)
 
 export const getGrowls = state => state.ui.growls

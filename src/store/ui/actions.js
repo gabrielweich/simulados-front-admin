@@ -9,6 +9,9 @@ const idSeq = sequence()
 
 const growlAdded = createAction('GROWL_ADDED')
 const growlRemoved = createAction('GROWL_REMOVED')
+const openSidebar = createAction('OPEN_SIDEBAR')
+const closeSidebar = createAction('CLOSE_SIDEBAR')
+const toggleSidebar = createAction('TOGGLE_SIDEBAR')
 
 const growl = (text, type = constants.GROWL_INFO) => dispatch => {
   const message = {
@@ -29,4 +32,7 @@ export {
   growlAdded,
   growlRemoved,
   growl,
+  openSidebar,
+  closeSidebar,
+  toggleSidebar,
 }

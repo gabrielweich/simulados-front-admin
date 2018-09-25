@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { bindActionCreators, compose } from 'redux'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { isSidebarOpen } from 'store/ui'

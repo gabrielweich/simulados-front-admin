@@ -5,9 +5,10 @@ import './icon.scss'
 
 const getIconContent = (name, options) => ({__html: feather.icons[name].toSvg(options)})
 
-const Icon = ({ name, width = 16, height = 16 }) => (
+const Icon = ({ name, width = 16, height = 16, onClick }) => (
   <i
     className="icon"
+    onClick={onClick}
     dangerouslySetInnerHTML={getIconContent(name, { width, height })}
   />
 )
