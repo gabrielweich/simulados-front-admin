@@ -34,6 +34,7 @@ class Login extends Component {
                         maxLength={50}
                         value={this.state.email}
                         type="text"
+                        onClick={() => this.onPressEnter()}
                     />
                     <Input
                         onChange={event => this.setState({ password: event.target.value })}
@@ -42,10 +43,12 @@ class Login extends Component {
                         maxLength={50}
                         className="login__input"
                         value={this.state.password}
+                        onClick={() => this.onPressEnter()}
                     />
                     <Button
                         className="flex justify-center login__button"
                         onClick={() => this.onPressEnter()}
+
                     >
                         Entrar
           </Button>
@@ -63,7 +66,7 @@ class Login extends Component {
         } else {
             console.log('tentando logar...')
             await this.props.fetchAuth(email, password)
-            this.props.push('/dashboard')
+
         }
     }
 }
