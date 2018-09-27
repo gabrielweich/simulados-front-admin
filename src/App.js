@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import ErrorBoundary from 'containers/ErrorBoundary'
 import Growl from 'containers/Growl'
@@ -16,4 +17,6 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default connect(
+  state => ({ router: state.router })
+)(App)

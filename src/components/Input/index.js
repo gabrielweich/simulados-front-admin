@@ -11,6 +11,7 @@ const Input = ({
   value,
   placeholder,
   type,
+  name,
   block,
 }) => (
   <T
@@ -19,6 +20,7 @@ const Input = ({
     value={value}
     placeholder={placeholder}
     type={type}
+    name={name}
   />
 )
 
@@ -33,6 +35,8 @@ const InputWithIcon = props => (
 
 const shouldHaveIcon = props =>
   'icon' in props || props.type === 'search'
+
+export const TextArea = props => <Input as="textarea" {...props} />
 
 export default props => shouldHaveIcon(props)
   ? <InputWithIcon {...props} />
