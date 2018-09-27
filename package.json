@@ -62,9 +62,21 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "lint-staged": {
+  "src/**/*.{js,jsx,json,scss}": [
+     "prettier --single-quote --write --no-semi --trailing-comma all",
+     "git add"
+   ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -108,6 +120,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "husky": "^1.0.1",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
     "react-hot-loader": "^4.3.4"
   }
 }
