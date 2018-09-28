@@ -16,11 +16,8 @@ import rootReducer from 'store'
 
 import App from './App'
 import Examples from 'scenes/Examples'
-<<<<<<< HEAD
 import CreateQuestion from 'scenes/CreateQuestion'
 import Layout from 'components/Layout'
-=======
->>>>>>> 408512ed8bb786ebec4f82060c79df9bf075be54
 import Login from 'scenes/Login'
 import ProtectedRoute from 'containers/ProtectedRoute'
 import './stylesheets/main.scss'
@@ -42,7 +39,6 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-<<<<<<< HEAD
       <Switch>
         <App>
           <Layout>
@@ -54,16 +50,6 @@ ReactDOM.render(
           </Layout>
         </App>
       </Switch>
-=======
-      <App>
-        <Switch>
-          <Route exact path="/examples" component={Examples} />
-          <Route path="/" component={Login} />
-          <ProtectedRoute path="/protected" component={() => 'Protected content'} />
-          <Route render={() => 404} />
-        </Switch>
-      </App>
->>>>>>> 408512ed8bb786ebec4f82060c79df9bf075be54
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
