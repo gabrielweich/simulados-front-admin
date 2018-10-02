@@ -1,19 +1,27 @@
 import { handleActions } from 'redux-actions'
 
-import { userLoaded } from './actions'
+import { userLoaded, userLogout } from './actions'
 
-const initialState = {}
+let initialState = {}
 
 const reducer = handleActions(
-    {
-        [userLoaded]: (state, action) => ({
-            ...state,
-            data: action.payload,
-        }),
-    },
-    initialState,
+  {
+    [userLoaded]: (state, action) => ({
+      ...state,
+      data: action.payload,
+    }),
+    [userLogout]: state => ({
+      ...state,
+      data: {},
+    }),
+  },
+  initialState,
 )
 
-export const getUser = state => state.user.data
+export const getData = state => state.user.data
+
+export const getUser = state => state.user.data.data.user
+
+export const isAuth = state => !!state.user.data && state.user.data.success
 
 export default reducer

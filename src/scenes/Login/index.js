@@ -5,81 +5,93 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
 import { growl } from 'store/ui/actions'
-import { GROWL_ERROR } from 'store/ui/constants'
+import Form from 'components/Form'
 
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { fetchAuth } from 'store/user/actions'
+import { fetchAuth, logout } from 'store/user/actions'
 import './login.scss'
 
 class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            password: '',
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      password: '',
     }
+  }
 
-    render() {
-        return (
-            <div>
-                <h1 className="text-center">Simulados OAB - Administrativo</h1>
+  componentDidMount() {
+    this.props.logout()
+  }
 
-                <div className="flex flex-column justify-center login__inputcontainer">
-                    <Input
-                        onChange={event => this.setState({ email: event.target.value })}
-                        placeholder="e-mail"
-                        className="login__input"
-                        maxLength={50}
-                        value={this.state.email}
-                        type="text"
-                        onClick={() => this.onPressEnter()}
-                    />
-                    <Input
-                        onChange={event => this.setState({ password: event.target.value })}
-                        placeholder="senha"
-                        type="password"
-                        maxLength={50}
-                        className="login__input"
-                        value={this.state.password}
-                        onClick={() => this.onPressEnter()}
-                    />
-                    <Button
-                        className="flex justify-center login__button"
-                        onClick={() => this.onPressEnter()}
+  render() {
+    return (
+      <div>
+        <h1 className="text-center">Simulados OAB - Administrativo</h1>
 
-                    >
-                        Entrar
-          </Button>
+        <div className="flex flex-column justify-center login__inputcontainer">
+          <Form
+            onSubmit={event => this.onPressEnter(event)}
+            type="submit"
+            className="flex flex-column"
+          >
+            <Input
+              onChange={event => this.setState({ email: event.target.value })}
+              placeholder="e-mail"
+              className="login__input"
+              maxLength={50}
+              value={this.state.email}
+              type="text"
+              required
+            />
+            <Input
+              onChange={event =>
+                this.setState({ password: event.target.value })
+              }
+              placeholder="senha"
+              type="password"
+              maxLength={50}
+              className="login__input"
+              value={this.state.password}
+              required
+            />
+            <Button className="flex justify-center login__button">
+              Fazer Login
+            </Button>
+          </Form>
+          {this.renderLine()}
+        </div>
+      </div>
+    )
+  }
 
-                </div>
-            </div>
-        )
-    }
+  async onPressEnter(event) {
+    const { email, password } = this.state
+    await this.props.fetchAuth(email, password)
+    this.props.push('/examples')
+  }
 
-    async onPressEnter() {
-        const { email, password } = this.state
-
-        if (email.length <= 0 || password.length <= 0) {
-            this.props.growl('Informe seu e-mail e senha de acesso.', GROWL_ERROR)
-        } else {
-            console.log('tentando logar...')
-            await this.props.fetchAuth(email, password)
-
-        }
-    }
+  renderLine() {
+    return (
+      <div className="flex justify-center items-center">
+        <div className="login__lineleft" />
+        <div className="login__lineright" />
+      </div>
+    )
+  }
 }
 
 export default connect(
-    null,
-    dispatch =>
-        bindActionCreators(
-            {
-                growl,
-                push,
-                fetchAuth,
-            },
-            dispatch,
-        ),
+  null,
+  dispatch =>
+    bindActionCreators(
+      {
+        growl,
+        push,
+        fetchAuth,
+        logout,
+      },
+      dispatch,
+    ),
 )(Login)
