@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions'
 import http from 'utils/http'
 import { growl } from 'store/ui/actions'
 import { GROWL_ERROR } from 'store/ui/constants'
+import { push } from 'connected-react-router'
 
 const userLoaded = createAction('USER_LOADED')
 const userLogout = createAction('USER_LOGOUT')
@@ -14,7 +15,7 @@ const login = (email, password) => dispatch => {
         password: password,
       },
     })
-    .then(user => dispatch(userLoaded(user)))
+    .then(user => dispatch(userLoaded(user)) && dispatch(push('/nova')))
     .catch(error => {
       dispatch(
         growl(

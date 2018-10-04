@@ -11,17 +11,22 @@ const Input = ({
   value,
   placeholder,
   type,
-  name,
   block,
+  className,
+  maxLength,
   required,
 }) => (
   <T
-    className={cn('input', (block || T === 'textarea') && 'input--block')}
+    className={cn(
+      'input',
+      (block || T === 'textarea') && 'input--block',
+      className,
+    )}
     onChange={onChange}
     value={value}
     placeholder={placeholder}
     type={type}
-    name={name}
+    maxLength={maxLength}
     required={required}
   />
 )

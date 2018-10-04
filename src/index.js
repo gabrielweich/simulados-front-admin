@@ -27,12 +27,12 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <App>
           <Switch>
-            <Route path="/" component={Login} />
+            <Route path="/login" component={Login} />
             <Layout>
-              <Route path="/examples" component={Examples} />
-              <ProtectedRoute path="/nova" component={CreateQuestion} />
+              <Route exact path="/examples" component={Examples} />
+              <ProtectedRoute exact path="/nova" component={CreateQuestion} />
             </Layout>
-            <Route exact path="*" render={() => 404} />
+            <Route path="*" render={() => 404} />
           </Switch>
         </App>
       </ConnectedRouter>
