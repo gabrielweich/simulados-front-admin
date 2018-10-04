@@ -2,12 +2,11 @@ import { createAction } from 'redux-actions'
 import http from 'utils/http'
 import { growl } from 'store/ui/actions'
 import { GROWL_ERROR } from 'store/ui/constants'
-import { push } from 'connected-react-router'
 
 const userLoaded = createAction('USER_LOADED')
 const userLogout = createAction('USER_LOGOUT')
 
-const fetchAuth = (email, password) => dispatch => {
+const login = (email, password) => dispatch => {
   return http
     .post('http://localhost:3000/signin', {
       data: {
@@ -28,8 +27,4 @@ const fetchAuth = (email, password) => dispatch => {
     })
 }
 
-const logout = () => dispatch => {
-  return dispatch(userLogout())
-}
-
-export { userLoaded, fetchAuth, logout, userLogout }
+export { userLoaded, login, userLogout }

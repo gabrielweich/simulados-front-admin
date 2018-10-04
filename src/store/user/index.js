@@ -20,7 +20,7 @@ const reducer = handleActions(
 
 export const getData = state => state.user.data
 
-export const getUser = state => state.user.data.data.user
+export const getStudent = state => state.user.data.data.user
 
 export const isAuth = state => !!state.user.data && state.user.data.success
 

@@ -9,7 +9,8 @@ import Form from 'components/Form'
 
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { fetchAuth, logout } from 'store/user/actions'
+import { login } from 'store/user/actions'
+import logo from 'assets/logo.png'
 import './login.scss'
 
 class Login extends Component {
@@ -21,18 +22,14 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.logout()
-  }
-
   render() {
     return (
-      <div>
-        <h1 className="text-center">Simulados OAB - Administrativo</h1>
-
-        <div className="flex flex-column justify-center login__inputcontainer">
+      <div className="flex flex-column justify-center items-center login__maincontainer">
+        <img className="login__logoimage" src={logo} />
+        <h1 className="h1 text-center">Entrar na sua conta</h1>
+        <div className="flex flex-column login__inputcontainer">
           <Form
-            onSubmit={event => this.onPressEnter(event)}
+            onSubmit={this.onPressEnter}
             type="submit"
             className="flex flex-column"
           >
@@ -66,9 +63,9 @@ class Login extends Component {
     )
   }
 
-  async onPressEnter(event) {
+  onPressEnter = async () => {
     const { email, password } = this.state
-    await this.props.fetchAuth(email, password)
+    await this.props.login(email, password)
     this.props.push('/examples')
   }
 
@@ -89,8 +86,7 @@ export default connect(
       {
         growl,
         push,
-        fetchAuth,
-        logout,
+        login,
       },
       dispatch,
     ),

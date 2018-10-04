@@ -27,7 +27,7 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <App>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route path="/" component={Login} />
             <Layout>
               <Route path="/examples" component={Examples} />
               <ProtectedRoute path="/nova" component={CreateQuestion} />
