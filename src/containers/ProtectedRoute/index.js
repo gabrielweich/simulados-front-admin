@@ -14,7 +14,7 @@ const ProtectedRoute = ({ isAllowed, component: Component, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/', // where user will be sent when disallowed
+            pathname: '/login', // where user will be sent when disallowed
             state: { from: props.location },
           }}
         />

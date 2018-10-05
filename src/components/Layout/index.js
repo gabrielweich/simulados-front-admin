@@ -20,14 +20,15 @@ class Layout extends React.Component {
 
   componentDidMount() {
     this.closeSidebarIfNecessary()
-    
-    window.addEventListener('resize',
-      throttle(300, this.closeSidebarIfNecessary)
+
+    window.addEventListener(
+      'resize',
+      throttle(300, this.closeSidebarIfNecessary),
     )
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize')
+    //window.removeEventListener('resize')
   }
 
   render() {
@@ -38,26 +39,16 @@ class Layout extends React.Component {
         <Sidebar />
         <div className="layout__container">
           <header className="layout__header">
-            <Icon
-              name="menu"
-              width={24}
-              height={24}
-              onClick={toggleSidebar}
-            />
+            <Icon name="menu" width={24} height={24} onClick={toggleSidebar} />
           </header>
-          <Container className="layout__content">
-            {children}
-          </Container>
+          <Container className="layout__content">{children}</Container>
         </div>
       </div>
     )
-
   }
 }
 
-export default
-  connect(
-    state => ({ router: state.router }),
-    dispatch => bindActionCreators({ toggleSidebar, closeSidebar }, dispatch)
-  )
-(Layout)
+export default connect(
+  state => ({ router: state.router }),
+  dispatch => bindActionCreators({ toggleSidebar, closeSidebar }, dispatch),
+)(Layout)

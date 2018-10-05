@@ -15,7 +15,7 @@ const login = (email, password) => dispatch => {
         password: password,
       },
     })
-    .then(user => dispatch(userLoaded(user)) && dispatch(push('/nova')))
+    .then(user => dispatch(userLoaded(user)) /*&& dispatch(push('/nova')*/)
     .catch(error => {
       dispatch(
         growl(
