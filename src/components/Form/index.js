@@ -6,7 +6,10 @@ const makeSubmitionHandler = props => event => {
 }
 
 const Form = props => (
-  <form className="form" onSubmit={makeSubmitionHandler(props)}>
+  <form
+    className={'form ' + props.className}
+    onSubmit={makeSubmitionHandler(props)}
+  >
     {props.children}
   </form>
 )

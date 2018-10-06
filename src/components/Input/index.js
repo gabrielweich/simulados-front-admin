@@ -11,16 +11,23 @@ const Input = ({
   value,
   placeholder,
   type,
-  name,
   block,
+  className,
+  maxLength,
+  required,
 }) => (
   <T
-    className={cn('input', (block || T === 'textarea') && 'input--block')}
+    className={cn(
+      'input',
+      (block || T === 'textarea') && 'input--block',
+      className,
+    )}
     onChange={onChange}
     value={value}
     placeholder={placeholder}
     type={type}
-    name={name}
+    maxLength={maxLength}
+    required={required}
   />
 )
 
@@ -33,11 +40,9 @@ const InputWithIcon = props => (
   </div>
 )
 
-const shouldHaveIcon = props =>
-  'icon' in props || props.type === 'search'
+const shouldHaveIcon = props => 'icon' in props || props.type === 'search'
 
 export const TextArea = props => <Input as="textarea" {...props} />
 
-export default props => shouldHaveIcon(props)
-  ? <InputWithIcon {...props} />
-  : <Input {...props} />
+export default props =>
+  shouldHaveIcon(props) ? <InputWithIcon {...props} /> : <Input {...props} />
