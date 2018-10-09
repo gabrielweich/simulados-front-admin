@@ -14,7 +14,7 @@ import './sidebar.scss'
 const routes = [
   {
     icon: '📖',
-    title: 'Lista de questões',
+    title: 'Lista de Questões',
     path: '/',
   },
   {

@@ -1,11 +1,11 @@
 import React from 'react'
 import Card from 'components/Card'
 
-const avaliableQuestions = this.props.data
-
-avaliableQuestions => {
-  avaliableQuestions.map(questions => (
-    <Card className="avaliableQuestions">{questions.data}</Card>
+const AvaliableQuestions = () => {
+  questions.map(question => (
+    <Card className="avaliableQuestions" key={question.id}>
+      {question.description}
+    </Card>
   ))
 }
 
