@@ -8,6 +8,7 @@ import Card from 'components/Card'
 import { growl } from 'store/ui/actions'
 
 import Button from 'components/Button'
+import AvaliableQuestions from 'components/AvaliableQuestions'
 import './listQuestions.scss'
 
 const idQuestions = [
@@ -38,6 +39,9 @@ class ListQuestions extends Component {
     this.state = {
       questions: idQuestions,
     }
+  }
+  componentDidMount() {
+    ;<AvaliableQuestions />
   }
 
   render() {
