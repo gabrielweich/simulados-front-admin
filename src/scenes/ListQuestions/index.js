@@ -8,12 +8,13 @@ import Card from 'components/Card'
 import { growl } from 'store/ui/actions'
 
 import Button from 'components/Button'
-import AvaliableQuestions from 'components/AvaliableQuestions'
+import AvailableQuestions from 'components/AvailableQuestions'
 import './listQuestions.scss'
 
-const idQuestions = [
+const questionsData = [
   {
-    description: 'bavlsadaskdjsakdlsajaslkdsa',
+    description:
+      'bavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsa',
     date: '12/02/2012',
     approved: true,
   },
@@ -37,19 +38,21 @@ class ListQuestions extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      questions: idQuestions,
+      questions: questionsData,
     }
-  }
-  componentDidMount() {
-    ;<AvaliableQuestions />
   }
 
   render() {
     return (
-      <div className="flex flex-column justify-center items-center login__maincontainer">
-        <h1>Lista de Questões</h1>
-        <h5 className="leftword">Enunciado</h5>
-        <h5 className="rightword">Data de criação</h5>
+      <div className="flex flex-column">
+        <h1 className="flex">Lista de Questões</h1>
+        <div className="flex justify-between ">
+          <h6 className="listQuestios__h6">Enunciado</h6>
+          <h6 className="listQuestios__h6">Data de criação</h6>
+        </div>
+        <div className="flex flex-column">
+          <AvailableQuestions data={this.state.questions} className="flex" />
+        </div>
       </div>
     )
   }
