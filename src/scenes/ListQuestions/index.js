@@ -38,7 +38,7 @@ class ListQuestions extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      questions: questionsData,
+      question: questionsData,
     }
   }
 
@@ -51,7 +51,7 @@ class ListQuestions extends Component {
           <h6 className="listQuestios__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          <AvailableQuestions data={this.state.questions} className="flex" />
+          <AvailableQuestions data={this.state.question} className="flex" />
         </div>
       </div>
     )
