@@ -8,7 +8,11 @@ import './availableQuestions.scss'
 
 const AvailableQuestions = props =>
   props.data.map(question => (
-    <Card className="cardQuestion flex justify-between " onClick="">
+    <Card
+      className="cardQuestion flex justify-between"
+      onClick=""
+      key={question.id}
+    >
       <h6 className="cardQuestion__h6 ">{question.statement}</h6>
       <h6>
         <Moment format="DD/MM/YYYY">{question.created_at}</Moment>

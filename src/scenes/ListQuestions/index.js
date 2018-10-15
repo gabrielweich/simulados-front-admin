@@ -13,35 +13,9 @@ import Button from 'components/Button'
 import AvailableQuestions from 'components/AvailableQuestions'
 import './listQuestions.scss'
 
-const questionsData = [
-  {
-    description:
-      'bavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsabavlsadaskdjsakdlsajaslkdsa',
-    date: '12/02/2012',
-    approved: true,
-  },
-  {
-    description: 'bavlsadaskdjsakdlsajaslkdsa',
-    date: '12/02/2012',
-    approved: true,
-  },
-  {
-    description: 'bavlsadaskdjsakdlsajaslkdsa',
-    date: '12/02/2012',
-    approved: true,
-  },
-  {
-    description: 'bavlsadaskdjsakdlsajaslkdsa',
-    date: '12/02/2012',
-    approved: true,
-  },
-]
 class ListQuestions extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      question: questionsData,
-    }
   }
 
   async componentDidMount() {
