@@ -31,16 +31,12 @@ class EditQuestion extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log(this.state.correctAlternative)
-  }
-
   render() {
     return (
       <div>
         <h1>Editar Questão</h1>
         <Form
-          onSubmit={this.onPressEnter}
+          onSubmit={this.onPressSaveQuestion}
           type="submit"
           className="flex flex-column"
         >
@@ -136,8 +132,8 @@ class EditQuestion extends React.Component {
     )
   }
 
-  onPressEnter = () => {
-    console.log('teste...')
+  onPressSaveQuestion = () => {
+    console.log('chamando serviço de atualizar questão...')
   }
 }
 
