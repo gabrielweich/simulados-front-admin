@@ -1,6 +1,8 @@
 import React from 'react'
 import Moment from 'react-moment'
 import { push } from 'connected-react-router'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import Card from 'components/Card'
 
@@ -10,7 +12,7 @@ const AvailableQuestions = props =>
   props.data.map(question => (
     <Card
       className="cardQuestion flex justify-between"
-      onClick=""
+      onClick={() => props.push('/edit', { question })}
       key={question.id}
     >
       <h6 className="cardQuestion__h6 ">{question.statement}</h6>
@@ -20,4 +22,13 @@ const AvailableQuestions = props =>
     </Card>
   ))
 
-export default AvailableQuestions
+export default connect(
+  null,
+  dispatch =>
+    bindActionCreators(
+      {
+        push,
+      },
+      dispatch,
+    ),
+)(AvailableQuestions)

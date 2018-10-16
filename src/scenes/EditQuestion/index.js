@@ -14,14 +14,18 @@ import { saveQuestion } from 'store/question/actions'
 class EditQuestion extends React.Component {
   constructor(props) {
     super(props)
+
+    const { question } = this.props.location.state
+
     this.state = {
-      statement: '',
+      question: question,
+      statement: question.statement,
       alternativeA: '',
       alternativeB: '',
       alternativeC: '',
       alternativeD: '',
-      comment: '',
-      complementaryMaterial: '',
+      comment: question.comment,
+      complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
     }
   }
@@ -39,12 +43,12 @@ class EditQuestion extends React.Component {
           value={this.state.statement}
           onChange={this.handleFormChange}
           name="statement"
-          label="Insira o enunciado da questão"
+          label="Enunciado da questão"
           as={TextArea}
         />
         <Field
           id="alternativeA"
-          value={this.state.statement}
+          value={this.state.alternativeA}
           onChange={this.handleFormChange}
           name="alternativeA"
           label="Alternativa A:"
@@ -52,7 +56,7 @@ class EditQuestion extends React.Component {
         />
         <Field
           id="alternativeB"
-          value={this.state.statement}
+          value={this.state.alternativeB}
           onChange={this.handleFormChange}
           name="alternativeB"
           label="Alternativa B:"
@@ -60,7 +64,7 @@ class EditQuestion extends React.Component {
         />
         <Field
           id="alternativeC"
-          value={this.state.statement}
+          value={this.state.alternativeC}
           onChange={this.handleFormChange}
           name="alternativeC"
           label="Alternativa C:"
@@ -68,7 +72,7 @@ class EditQuestion extends React.Component {
         />
         <Field
           id="alternativeD"
-          value={this.state.statement}
+          value={this.state.alternativeD}
           onChange={this.handleFormChange}
           name="alternativeD"
           label="Alternativa D:"
@@ -76,7 +80,7 @@ class EditQuestion extends React.Component {
         />
         <Field
           id="comment"
-          value={this.state.statement}
+          value={this.state.comment}
           onChange={this.handleFormChange}
           name="comment"
           label="Comentário do Professor:"
@@ -84,18 +88,18 @@ class EditQuestion extends React.Component {
         />
         <Field
           id="complementaryMaterial"
-          value={this.state.statement}
+          value={this.state.complementaryMaterial}
           onChange={this.handleFormChange}
           name="complementaryMaterial"
           label="Material Complementar"
         />
         <Field
           id="correctAlternative"
-          value={this.state.statement}
+          value={this.state.correctAlternative}
           onChange={this.handleFormChange}
           name="correctAlternative"
           className="space-stack-l"
-          label="Informar qual é a alternativa correta"
+          label="Alternativa correta:"
           as={RadioGroup}
           name="radio"
           options={[
