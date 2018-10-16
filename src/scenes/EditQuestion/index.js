@@ -5,6 +5,7 @@ import Field from 'components/Field'
 import Input, { TextArea } from 'components/Input'
 import Button from 'components/Button'
 import RadioGroup from 'components/RadioGroup'
+import Form from 'components/Form'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -30,95 +31,113 @@ class EditQuestion extends React.Component {
     }
   }
 
-  handleFormChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+  componentDidUpdate() {
+    console.log(this.state.correctAlternative)
   }
 
   render() {
     return (
       <div>
         <h1>Editar Questão</h1>
-        <Field
-          id="statement"
-          value={this.state.statement}
-          onChange={this.handleFormChange}
-          name="statement"
-          label="Enunciado da questão"
-          as={TextArea}
-        />
-        <Field
-          id="alternativeA"
-          value={this.state.alternativeA}
-          onChange={this.handleFormChange}
-          name="alternativeA"
-          label="Alternativa A:"
-          as={TextArea}
-        />
-        <Field
-          id="alternativeB"
-          value={this.state.alternativeB}
-          onChange={this.handleFormChange}
-          name="alternativeB"
-          label="Alternativa B:"
-          as={TextArea}
-        />
-        <Field
-          id="alternativeC"
-          value={this.state.alternativeC}
-          onChange={this.handleFormChange}
-          name="alternativeC"
-          label="Alternativa C:"
-          as={TextArea}
-        />
-        <Field
-          id="alternativeD"
-          value={this.state.alternativeD}
-          onChange={this.handleFormChange}
-          name="alternativeD"
-          label="Alternativa D:"
-          as={TextArea}
-        />
-        <Field
-          id="comment"
-          value={this.state.comment}
-          onChange={this.handleFormChange}
-          name="comment"
-          label="Comentário do Professor:"
-          as={TextArea}
-        />
-        <Field
-          id="complementaryMaterial"
-          value={this.state.complementaryMaterial}
-          onChange={this.handleFormChange}
-          name="complementaryMaterial"
-          label="Material Complementar"
-        />
-        <Field
-          id="correctAlternative"
-          value={this.state.correctAlternative}
-          onChange={this.handleFormChange}
-          name="correctAlternative"
-          className="space-stack-l"
-          label="Alternativa correta:"
-          as={RadioGroup}
-          name="radio"
-          options={[
-            { value: 'alternativaA', label: 'A' },
-            { value: 'alternativaB', label: 'B' },
-            { value: 'alternativaC', label: 'C' },
-            { value: 'alternativaD', label: 'D' },
-          ]}
-        />
-        <footer className="flex justify-between">
-          <Button onClick={() => this.props.saveQuestion(this.state)}>
-            Salvar questão
-          </Button>
-          <Button onClick={() => this.props.approveQuestion(this.state)}>
-            Aprovar questão
-          </Button>
-        </footer>
+        <Form
+          onSubmit={this.onPressEnter}
+          type="submit"
+          className="flex flex-column"
+        >
+          <Field
+            id="statement"
+            value={this.state.statement}
+            onChange={event => this.setState({ statement: event.target.value })}
+            name="statement"
+            label="Enunciado da questão"
+            as={TextArea}
+            type="text"
+          />
+          <Field
+            id="alternativeA"
+            value={this.state.alternativeA}
+            onChange={event =>
+              this.setState({ alternativeA: event.target.value })
+            }
+            name="alternativeA"
+            label="Alternativa A:"
+            as={TextArea}
+          />
+          <Field
+            id="alternativeB"
+            value={this.state.alternativeB}
+            onChange={event =>
+              this.setState({ alternativeB: event.target.value })
+            }
+            name="alternativeB"
+            label="Alternativa B:"
+            as={TextArea}
+          />
+          <Field
+            id="alternativeC"
+            value={this.state.alternativeC}
+            onChange={event =>
+              this.setState({ alternativeC: event.target.value })
+            }
+            name="alternativeC"
+            label="Alternativa C:"
+            as={TextArea}
+          />
+          <Field
+            id="alternativeD"
+            value={this.state.alternativeD}
+            onChange={event =>
+              this.setState({ alternativeD: event.target.value })
+            }
+            name="alternativeD"
+            label="Alternativa D:"
+            as={TextArea}
+          />
+          <Field
+            id="comment"
+            value={this.state.comment}
+            onChange={event => this.setState({ comment: event.target.value })}
+            name="comment"
+            label="Comentário do Professor:"
+            as={TextArea}
+          />
+          <Field
+            id="complementaryMaterial"
+            value={this.state.complementaryMaterial}
+            onChange={event =>
+              this.setState({ complementaryMaterial: event.target.value })
+            }
+            name="complementaryMaterial"
+            label="Material Complementar"
+          />
+          <Field
+            id="correctAlternative"
+            value={this.state.correctAlternative}
+            onChange={event =>
+              this.setState({ correctAlternative: event.target.id })
+            }
+            name="correctAlternative"
+            className="space-stack-l"
+            label="Alternativa correta:"
+            as={RadioGroup}
+            name="radio"
+            options={[
+              { value: 'A', label: 'A' },
+              { value: 'B', label: 'B' },
+              { value: 'C', label: 'C' },
+              { value: 'D', label: 'D' },
+            ]}
+          />
+          <footer className="flex justify-end">
+            <Button>Salvar questão</Button>
+          </footer>
+        </Form>
       </div>
     )
+  }
+
+  onPressEnter = () => {
+    console.log('teste...')
   }
 }
 
