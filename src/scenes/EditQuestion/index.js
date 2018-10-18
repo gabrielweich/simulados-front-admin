@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { saveQuestion } from 'store/question/actions'
+import { getAlternatives } from '../../store/question'
 
 class EditQuestion extends React.Component {
   constructor(props) {
@@ -28,10 +29,18 @@ class EditQuestion extends React.Component {
       comment: question.comment,
       complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
+      questionAlternatives: [],
     }
   }
-
+  componentWillMount() {
+    const { alternatives } = this.props
+    const questionAlternatives = alternatives.filter(
+      alternative => alternative.question_id == this.state.question.id,
+    )
+    this.setState({ questionAlternatives })
+  }
   render() {
+    console.log(this.state.questionAlternatives)
     return (
       <div>
         <h1>Editar Questão</h1>
@@ -51,9 +60,9 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeA"
-            value={this.state.alternativeA}
+            value={this.state.questionAlternatives[0].description}
             onChange={event =>
-              this.setState({ alternativeA: event.target.value })
+              this.setState({ questionAlternatives: event.target.value })
             }
             name="alternativeA"
             label="Alternativa A:"
@@ -61,9 +70,9 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeB"
-            value={this.state.alternativeB}
+            value={this.state.questionAlternatives[1].description}
             onChange={event =>
-              this.setState({ alternativeB: event.target.value })
+              this.setState({ questionAlternatives: event.target.value })
             }
             name="alternativeB"
             label="Alternativa B:"
@@ -71,9 +80,9 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeC"
-            value={this.state.alternativeC}
+            value={this.state.questionAlternatives[2].description}
             onChange={event =>
-              this.setState({ alternativeC: event.target.value })
+              this.setState({ questionAlternatives: event.target.value })
             }
             name="alternativeC"
             label="Alternativa C:"
@@ -81,9 +90,9 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeD"
-            value={this.state.alternativeD}
+            value={this.state.questionAlternatives[3].description}
             onChange={event =>
-              this.setState({ alternativeD: event.target.value })
+              this.setState({ questionAlternatives: event.target.value })
             }
             name="alternativeD"
             label="Alternativa D:"
@@ -136,9 +145,12 @@ class EditQuestion extends React.Component {
     console.log('chamando serviço de atualizar questão...')
   }
 }
+const mapStateToProps = state => ({
+  alternatives: getAlternatives(state),
+})
 
 export default connect(
-  null,
+  mapStateToProps,
   dispatch =>
     bindActionCreators(
       {

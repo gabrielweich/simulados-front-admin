@@ -17,7 +17,7 @@ const fetchQuestions = (professorId, subArea, offset, limit) => dispatch => {
     .get(
       `http://localhost:3000/professor/questions/${professorId}?subArea=${subArea}&offset=${offset}&limit=${limit}`,
     )
-    .then(questions => dispatch(questionsLoaded(questions.questions)))
+    .then(questions => dispatch(questionsLoaded(questions)))
     .catch(() => dispatch(growl('Erro ao carregar questões', GROWL_ERROR)))
 }
 
