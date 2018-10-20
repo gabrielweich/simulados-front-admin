@@ -12,13 +12,23 @@ const saveQuestion = question => {
   }
 }
 
+const editQuestion = question => {
+  return () => {
+    console.log(question)
+    return http
+      .put(`http://localhost:3000/professor/questions/${question.id}`, {
+        data: question,
+      })
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
+  }
+}
+
 const fetchQuestions = (professorId, subArea, offset, limit) => dispatch => {
   http
-    .get(
-      `http://localhost:3000/professor/questions/${professorId}?subArea=${subArea}&offset=${offset}&limit=${limit}`,
-    )
+    .get(`http://localhost:3000/professor/questions/${professorId}`)
     .then(questions => dispatch(questionsLoaded(questions)))
     .catch(() => dispatch(growl('Erro ao carregar questões', GROWL_ERROR)))
 }
 
-export { saveQuestion, questionsLoaded, fetchQuestions }
+export { saveQuestion, questionsLoaded, fetchQuestions, editQuestion }

@@ -6,11 +6,12 @@ import Input, { TextArea } from 'components/Input'
 import Button from 'components/Button'
 import RadioGroup from 'components/RadioGroup'
 import Form from 'components/Form'
+import { getData } from 'store/user'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { saveQuestion } from 'store/question/actions'
+import { editQuestion } from 'store/question/actions'
 import { getAlternatives } from '../../store/question'
 
 class EditQuestion extends React.Component {
@@ -18,18 +19,15 @@ class EditQuestion extends React.Component {
     super(props)
 
     const { question } = this.props.location.state
-
+    console.log(question)
     this.state = {
       question: question,
       statement: question.statement,
-      alternativeA: '',
-      alternativeB: '',
-      alternativeC: '',
-      alternativeD: '',
       comment: question.comment,
       complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
       questionAlternatives: [],
+      correctRadioIndex: '',
       options: [
         { value: 'A', label: 'A', checked: false },
         { value: 'B', label: 'B', checked: false },
@@ -59,6 +57,7 @@ class EditQuestion extends React.Component {
         options[index].checked = true
         this.setState({
           options: options,
+          correctRadioIndex: index,
         })
       }
     }
@@ -69,7 +68,7 @@ class EditQuestion extends React.Component {
       <div>
         <h1>Editar Questão</h1>
         <Form
-          onSubmit={this.onPressSaveQuestion}
+          onSubmit={this.onPressEditQuestion}
           type="submit"
           className="flex flex-column"
         >
@@ -85,9 +84,7 @@ class EditQuestion extends React.Component {
           <Field
             id="alternativeA"
             value={this.state.questionAlternatives[0].description}
-            onChange={event =>
-              this.setState({ questionAlternatives: event.target.value })
-            }
+            onChange={event => this.onChangeAlternative(event.target.value, 0)}
             name="alternativeA"
             label="Alternativa A:"
             as={TextArea}
@@ -95,9 +92,7 @@ class EditQuestion extends React.Component {
           <Field
             id="alternativeB"
             value={this.state.questionAlternatives[1].description}
-            onChange={event =>
-              this.setState({ questionAlternatives: event.target.value })
-            }
+            onChange={event => this.onChangeAlternative(event.target.value, 1)}
             name="alternativeB"
             label="Alternativa B:"
             as={TextArea}
@@ -105,9 +100,7 @@ class EditQuestion extends React.Component {
           <Field
             id="alternativeC"
             value={this.state.questionAlternatives[2].description}
-            onChange={event =>
-              this.setState({ questionAlternatives: event.target.value })
-            }
+            onChange={event => this.onChangeAlternative(event.target.value, 2)}
             name="alternativeC"
             label="Alternativa C:"
             as={TextArea}
@@ -115,9 +108,7 @@ class EditQuestion extends React.Component {
           <Field
             id="alternativeD"
             value={this.state.questionAlternatives[3].description}
-            onChange={event =>
-              this.setState({ questionAlternatives: event.target.value })
-            }
+            onChange={event => this.onChangeAlternative(event.target.value, 3)}
             name="alternativeD"
             label="Alternativa D:"
             as={TextArea}
@@ -157,6 +148,14 @@ class EditQuestion extends React.Component {
     )
   }
 
+  onChangeAlternative(text, index) {
+    const alternatives = this.state.questionAlternatives
+    alternatives[index].description = text
+    this.setState({
+      questionAlternatives: alternatives,
+    })
+  }
+
   setOption(label) {
     let options = this.state.options
     let questionAlternatives = this.state.questionAlternatives
@@ -164,6 +163,9 @@ class EditQuestion extends React.Component {
       if (options[index].label === label) {
         questionAlternatives[index].correct = true
         options[index].checked = true
+        this.setState({
+          correctRadioIndex: index,
+        })
       } else {
         questionAlternatives[index].correct = false
         options[index].checked = false
@@ -175,12 +177,35 @@ class EditQuestion extends React.Component {
     })
   }
 
-  onPressSaveQuestion = () => {
-    console.log('chamando serviço de atualizar questão...')
+  onPressEditQuestion = () => {
+    const {
+      statement,
+      comment,
+      complementaryMaterial,
+      questionAlternatives,
+      correctRadioIndex,
+      question,
+    } = this.state
+
+    const updatedQuestion = {
+      id: question.id,
+      professor_id: question.professor_id,
+      coordinator_id: question.coordinator_id,
+      subarea_id: question.subarea_id,
+      approved: this.state.question.approved,
+      statement: statement,
+      correctAlternativeIndex: correctRadioIndex,
+      comment: comment,
+      studyMaterials: complementaryMaterial,
+      questionAlternatives: questionAlternatives,
+    }
+    console.log(updatedQuestion)
+    this.props.editQuestion(updatedQuestion)
   }
 }
 const mapStateToProps = state => ({
   alternatives: getAlternatives(state),
+  profile: getData(state),
 })
 
 export default connect(
@@ -188,7 +213,7 @@ export default connect(
   dispatch =>
     bindActionCreators(
       {
-        saveQuestion,
+        editQuestion,
       },
       dispatch,
     ),

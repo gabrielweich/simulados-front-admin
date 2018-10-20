@@ -9,6 +9,7 @@ import { growl } from 'store/ui/actions'
 
 import { fetchQuestions } from 'store/question/actions'
 import { getQuestions } from 'store/question'
+import { getData } from 'store/user'
 import Button from 'components/Button'
 import AvailableQuestions from 'components/AvailableQuestions'
 import './listQuestions.scss'
@@ -19,7 +20,8 @@ class ListQuestions extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchQuestions(1, 1, 0, 0)
+    const { profile } = this.props
+    await this.props.fetchQuestions(profile.data.professor.id)
   }
 
   render() {
@@ -40,6 +42,7 @@ class ListQuestions extends Component {
 
 const mapStateToProps = state => ({
   questions: getQuestions(state),
+  profile: getData(state),
 })
 
 export default connect(
