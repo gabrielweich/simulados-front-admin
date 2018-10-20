@@ -25,6 +25,8 @@ class ListQuestions extends Component {
   }
 
   render() {
+    const { questions } = this.props
+
     return (
       <div className="flex flex-column">
         <h1 className="flex">Lista de Questões</h1>
@@ -33,7 +35,10 @@ class ListQuestions extends Component {
           <h6 className="listQuestios__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          <AvailableQuestions data={this.props.questions} className="flex" />
+          <AvailableQuestions
+            data={!!questions ? questions : []}
+            className="flex"
+          />
         </div>
       </div>
     )

@@ -66,7 +66,7 @@ class Login extends Component {
   onPressEnter = async () => {
     const { email, password } = this.state
     await this.props.login(email, password)
-    this.props.push('/nova')
+    this.props.push('/')
   }
 
   renderLine() {

@@ -1,27 +1,32 @@
 import http from 'utils/http'
 import { createAction } from 'redux-actions'
 import { growl } from 'store/ui/actions'
-import { GROWL_ERROR } from 'store/ui/constants'
+import { GROWL_ERROR, GROWL_SUCCESS } from 'store/ui/constants'
 
 const questionsLoaded = createAction('QUESTIONS_LOADED')
 
 const saveQuestion = question => {
   return () => {
-    console.log(question)
     return http.post('http://localhost:3000/questions', { data: question })
   }
 }
 
-const editQuestion = question => {
-  return () => {
-    console.log(question)
-    return http
-      .put(`http://localhost:3000/professor/questions/${question.id}`, {
-        data: question,
-      })
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
-  }
+const editQuestion = question => dispatch => {
+  http
+    .put(`http://localhost:3000/questions/${question.id}`, {
+      data: question,
+    })
+    .then(() => dispatch(growl('Questão alterada com sucesso.', GROWL_SUCCESS)))
+    .catch(error =>
+      dispatch(
+        growl(
+          error.message === '400'
+            ? 'Campos informados invalidos'
+            : 'Erro ao atualizar questão',
+          GROWL_ERROR,
+        ),
+      ),
+    )
 }
 
 const fetchQuestions = (professorId, subArea, offset, limit) => dispatch => {

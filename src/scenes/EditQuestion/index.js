@@ -19,7 +19,6 @@ class EditQuestion extends React.Component {
     super(props)
 
     const { question } = this.props.location.state
-    console.log(question)
     this.state = {
       question: question,
       statement: question.statement,
@@ -37,7 +36,7 @@ class EditQuestion extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.filterQuestionsAlternatives()
   }
 
@@ -50,13 +49,16 @@ class EditQuestion extends React.Component {
     this.setCorrectQuestionRadio(questionAlternatives)
   }
 
-  setCorrectQuestionRadio(questionAlternatives) {
+  async setCorrectQuestionRadio(questionAlternatives) {
     for (let index = 0; index < questionAlternatives.length; index++) {
       if (questionAlternatives[index].correct) {
-        let options = this.state.options
-        options[index].checked = true
-        this.setState({
-          options: options,
+        const options = this.state.options
+        const newOptions = options.map(
+          (item, indexOp) =>
+            index === indexOp ? { ...item, checked: true } : item,
+        )
+        await this.setState({
+          options: newOptions,
           correctRadioIndex: index,
         })
       }
@@ -64,6 +66,14 @@ class EditQuestion extends React.Component {
   }
 
   render() {
+    const {
+      questionAlternatives,
+      comment,
+      statement,
+      complementaryMaterial,
+      options,
+    } = this.state
+
     return (
       <div>
         <h1>Editar Questão</h1>
@@ -74,7 +84,7 @@ class EditQuestion extends React.Component {
         >
           <Field
             id="statement"
-            value={this.state.statement}
+            value={statement}
             onChange={event => this.setState({ statement: event.target.value })}
             name="statement"
             label="Enunciado da questão"
@@ -83,7 +93,11 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeA"
-            value={this.state.questionAlternatives[0].description}
+            value={
+              !!questionAlternatives[0]
+                ? questionAlternatives[0].description
+                : ''
+            }
             onChange={event => this.onChangeAlternative(event.target.value, 0)}
             name="alternativeA"
             label="Alternativa A:"
@@ -91,7 +105,11 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeB"
-            value={this.state.questionAlternatives[1].description}
+            value={
+              !!questionAlternatives[1]
+                ? questionAlternatives[1].description
+                : ''
+            }
             onChange={event => this.onChangeAlternative(event.target.value, 1)}
             name="alternativeB"
             label="Alternativa B:"
@@ -99,7 +117,11 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeC"
-            value={this.state.questionAlternatives[2].description}
+            value={
+              !!questionAlternatives[2]
+                ? questionAlternatives[2].description
+                : ''
+            }
             onChange={event => this.onChangeAlternative(event.target.value, 2)}
             name="alternativeC"
             label="Alternativa C:"
@@ -107,7 +129,11 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeD"
-            value={this.state.questionAlternatives[3].description}
+            value={
+              !!questionAlternatives[3]
+                ? questionAlternatives[3].description
+                : ''
+            }
             onChange={event => this.onChangeAlternative(event.target.value, 3)}
             name="alternativeD"
             label="Alternativa D:"
@@ -115,7 +141,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="comment"
-            value={this.state.comment}
+            value={comment}
             onChange={event => this.setState({ comment: event.target.value })}
             name="comment"
             label="Comentário do Professor:"
@@ -123,7 +149,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="complementaryMaterial"
-            value={this.state.complementaryMaterial}
+            value={complementaryMaterial}
             onChange={event =>
               this.setState({ complementaryMaterial: event.target.value })
             }
@@ -138,7 +164,7 @@ class EditQuestion extends React.Component {
             label="Alternativa correta:"
             as={RadioGroup}
             name="radio"
-            options={this.state.options}
+            options={options}
           />
           <footer className="flex justify-end">
             <Button>Salvar questão</Button>
@@ -192,14 +218,13 @@ class EditQuestion extends React.Component {
       professor_id: question.professor_id,
       coordinator_id: question.coordinator_id,
       subarea_id: question.subarea_id,
-      approved: this.state.question.approved,
+      approved: question.approved,
       statement: statement,
       correctAlternativeIndex: correctRadioIndex,
       comment: comment,
       studyMaterials: complementaryMaterial,
       questionAlternatives: questionAlternatives,
     }
-    console.log(updatedQuestion)
     this.props.editQuestion(updatedQuestion)
   }
 }
