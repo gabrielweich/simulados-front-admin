@@ -32,7 +32,7 @@ const editQuestion = question => dispatch => {
 const fetchQuestions = (professorId, subArea, offset, limit) => dispatch => {
   http
     .get(`http://localhost:3000/professor/questions/${professorId}`)
-    .then(questions => dispatch(questionsLoaded(questions)))
+    .then(listQuestions => dispatch(questionsLoaded(listQuestions)))
     .catch(() => dispatch(growl('Erro ao carregar questões', GROWL_ERROR)))
 }
 

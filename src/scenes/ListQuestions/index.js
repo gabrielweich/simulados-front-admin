@@ -31,14 +31,17 @@ class ListQuestions extends Component {
       <div className="flex flex-column">
         <h1 className="flex">Lista de Questões</h1>
         <div className="flex justify-between ">
-          <h6 className="listQuestios__h6">Enunciado</h6>
-          <h6 className="listQuestios__h6">Data de criação</h6>
+          <h6 className="listQuestions__h6">Enunciado</h6>
+          <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          <AvailableQuestions
-            data={!!questions ? questions : []}
-            className="flex"
-          />
+          {!!questions ? (
+            <AvailableQuestions data={questions} className="flex" />
+          ) : (
+            <h5 className="text-center listQuestions__h5">
+              Você não possui questôes para editar.
+            </h5>
+          )}
         </div>
       </div>
     )

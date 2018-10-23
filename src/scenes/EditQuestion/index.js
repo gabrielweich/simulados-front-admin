@@ -36,7 +36,7 @@ class EditQuestion extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.filterQuestionsAlternatives()
   }
 
@@ -93,11 +93,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeA"
-            value={
-              !!questionAlternatives[0]
-                ? questionAlternatives[0].description
-                : ''
-            }
+            value={questionAlternatives[0].description}
             onChange={event => this.onChangeAlternative(event.target.value, 0)}
             name="alternativeA"
             label="Alternativa A:"
@@ -105,11 +101,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeB"
-            value={
-              !!questionAlternatives[1]
-                ? questionAlternatives[1].description
-                : ''
-            }
+            value={questionAlternatives[1].description}
             onChange={event => this.onChangeAlternative(event.target.value, 1)}
             name="alternativeB"
             label="Alternativa B:"
@@ -117,11 +109,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeC"
-            value={
-              !!questionAlternatives[2]
-                ? questionAlternatives[2].description
-                : ''
-            }
+            value={questionAlternatives[2].description}
             onChange={event => this.onChangeAlternative(event.target.value, 2)}
             name="alternativeC"
             label="Alternativa C:"
@@ -129,11 +117,7 @@ class EditQuestion extends React.Component {
           />
           <Field
             id="alternativeD"
-            value={
-              !!questionAlternatives[3]
-                ? questionAlternatives[3].description
-                : ''
-            }
+            value={questionAlternatives[3].description}
             onChange={event => this.onChangeAlternative(event.target.value, 3)}
             name="alternativeD"
             label="Alternativa D:"

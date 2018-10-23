@@ -2,20 +2,20 @@ import { handleActions } from 'redux-actions'
 import { questionsLoaded } from './actions'
 
 const initialState = {
-  questions: [],
+  data: [],
 }
 
 const reducer = handleActions(
   {
     [questionsLoaded]: (state, action) => ({
       ...state,
-      questions: action.payload,
+      data: action.payload,
     }),
   },
   initialState,
 )
 
-export const getQuestions = state => state.question.questions.questions
-export const getAlternatives = state => state.question.questions.alternatives
+export const getQuestions = state => state.question.data.questions
+export const getAlternatives = state => state.question.data.alternatives
 
 export default reducer
