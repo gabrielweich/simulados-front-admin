@@ -65,6 +65,11 @@ class EditQuestion extends React.Component {
     }
   }
 
+  verifyIfIsCordinator() {
+    const { coordinator } = this.props.profile.data
+    return !!coordinator
+  }
+
   render() {
     const {
       questionAlternatives,
@@ -150,8 +155,11 @@ class EditQuestion extends React.Component {
             name="radio"
             options={options}
           />
-          <footer className="flex justify-end">
-            <Button>Salvar questão</Button>
+          <footer className="flex justify-between">
+            <Button>Salvar Questão</Button>
+            {this.verifyIfIsCordinator() && (
+              <Button onClick={this.approveQuestion}>Aprovar Questão</Button>
+            )}
           </footer>
         </Form>
       </div>
@@ -210,6 +218,31 @@ class EditQuestion extends React.Component {
       questionAlternatives: questionAlternatives,
     }
     this.props.editQuestion(updatedQuestion)
+  }
+
+  approveQuestion = () => {
+    const {
+      statement,
+      comment,
+      complementaryMaterial,
+      questionAlternatives,
+      correctRadioIndex,
+      question,
+    } = this.state
+
+    const approvedQuestions = {
+      id: question.id,
+      professor_id: question.professor_id,
+      coordinator_id: question.coordinator_id,
+      subarea_id: question.subarea_id,
+      approved: true,
+      statement: statement,
+      correctAlternativeIndex: correctRadioIndex,
+      comment: comment,
+      studyMaterials: complementaryMaterial,
+      questionAlternatives: questionAlternatives,
+    }
+    this.props.editQuestion(approvedQuestions)
   }
 }
 const mapStateToProps = state => ({
