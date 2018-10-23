@@ -65,6 +65,59 @@ class EditQuestion extends React.Component {
     }
   }
 
+  onChangeAlternative(text, index) {
+    const alternatives = this.state.questionAlternatives
+    alternatives[index].description = text
+    this.setState({
+      questionAlternatives: alternatives,
+    })
+  }
+
+  setOption(label) {
+    let options = this.state.options
+    let questionAlternatives = this.state.questionAlternatives
+    for (let index = 0; index < options.length; index++) {
+      if (options[index].label === label) {
+        questionAlternatives[index].correct = true
+        options[index].checked = true
+        this.setState({
+          correctRadioIndex: index,
+        })
+      } else {
+        questionAlternatives[index].correct = false
+        options[index].checked = false
+      }
+    }
+    this.setState({
+      options,
+      questionAlternatives,
+    })
+  }
+
+  onPressEditQuestion = () => {
+    const {
+      statement,
+      comment,
+      complementaryMaterial,
+      questionAlternatives,
+      correctRadioIndex,
+      question,
+    } = this.state
+
+    const updatedQuestion = {
+      id: question.id,
+      professor_id: question.professor_id,
+      coordinator_id: question.coordinator_id,
+      subarea_id: question.subarea_id,
+      approved: question.approved,
+      statement: statement,
+      correctAlternativeIndex: correctRadioIndex,
+      comment: comment,
+      studyMaterials: complementaryMaterial,
+      questionAlternatives: questionAlternatives,
+    }
+    this.props.editQuestion(updatedQuestion)
+  }
   render() {
     const {
       questionAlternatives,
@@ -156,60 +209,6 @@ class EditQuestion extends React.Component {
         </Form>
       </div>
     )
-  }
-
-  onChangeAlternative(text, index) {
-    const alternatives = this.state.questionAlternatives
-    alternatives[index].description = text
-    this.setState({
-      questionAlternatives: alternatives,
-    })
-  }
-
-  setOption(label) {
-    let options = this.state.options
-    let questionAlternatives = this.state.questionAlternatives
-    for (let index = 0; index < options.length; index++) {
-      if (options[index].label === label) {
-        questionAlternatives[index].correct = true
-        options[index].checked = true
-        this.setState({
-          correctRadioIndex: index,
-        })
-      } else {
-        questionAlternatives[index].correct = false
-        options[index].checked = false
-      }
-    }
-    this.setState({
-      options,
-      questionAlternatives,
-    })
-  }
-
-  onPressEditQuestion = () => {
-    const {
-      statement,
-      comment,
-      complementaryMaterial,
-      questionAlternatives,
-      correctRadioIndex,
-      question,
-    } = this.state
-
-    const updatedQuestion = {
-      id: question.id,
-      professor_id: question.professor_id,
-      coordinator_id: question.coordinator_id,
-      subarea_id: question.subarea_id,
-      approved: question.approved,
-      statement: statement,
-      correctAlternativeIndex: correctRadioIndex,
-      comment: comment,
-      studyMaterials: complementaryMaterial,
-      questionAlternatives: questionAlternatives,
-    }
-    this.props.editQuestion(updatedQuestion)
   }
 }
 const mapStateToProps = state => ({
