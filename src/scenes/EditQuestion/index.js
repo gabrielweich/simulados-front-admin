@@ -18,7 +18,7 @@ class EditQuestion extends React.Component {
   constructor(props) {
     super(props)
 
-    const { question } = this.props.location.state
+    const { question } = props.location.state
     this.state = {
       question: question,
       statement: question.statement,
