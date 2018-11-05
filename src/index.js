@@ -33,7 +33,7 @@ ReactDOM.render(
             <Layout>
               <Route exact path="/examples" component={Examples} />
               <ProtectedRoute exact path="/nova" component={CreateQuestion} />
-              <ProtectedRoute exact path="/edit" component={EditQuestion} />
+              <ProtectedRoute path="/edit/:id" component={EditQuestion} />
               <ProtectedRoute exact path="/" component={ListQuestions} />
             </Layout>
             <Route path="*" render={() => 404} />

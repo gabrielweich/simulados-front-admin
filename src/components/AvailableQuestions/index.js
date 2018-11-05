@@ -12,7 +12,7 @@ const AvailableQuestions = props =>
   props.data.map(question => (
     <Link
       to={{
-        pathname: '/edit',
+        pathname: '/edit/' + question.id,
         state: { question },
       }}
     >
