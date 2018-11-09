@@ -12,13 +12,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { editQuestion } from 'store/question/actions'
-import { getAlternatives } from '../../store/question'
+import { getAlternatives, getQuestions } from '../../store/question'
 
 class EditQuestion extends React.Component {
   constructor(props) {
     super(props)
 
-    const { question } = props.location.state
+    const { id } = props.match.params
+    const question = this.getQuestion(id)
+
     this.state = {
       question: question,
       statement: question.statement,
@@ -38,6 +40,16 @@ class EditQuestion extends React.Component {
 
   componentWillMount() {
     this.filterQuestionsAlternatives()
+  }
+
+  getQuestion(id) {
+    let matchQuestions
+    this.props.questions.forEach(question => {
+      if (question.id == id) {
+        matchQuestions = question
+      }
+    })
+    return matchQuestions
   }
 
   filterQuestionsAlternatives() {
@@ -214,6 +226,7 @@ class EditQuestion extends React.Component {
 const mapStateToProps = state => ({
   alternatives: getAlternatives(state),
   profile: getData(state),
+  questions: getQuestions(state),
 })
 
 export default connect(

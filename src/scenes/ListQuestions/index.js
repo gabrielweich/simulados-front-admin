@@ -35,7 +35,7 @@ class ListQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!questions.length == 0 ? (
+          {!!questions && !questions.length == 0 ? (
             <AvailableQuestions data={questions} className="flex" />
           ) : (
             <h5 className="text-center listQuestions__h5">
