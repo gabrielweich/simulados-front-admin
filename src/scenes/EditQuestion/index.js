@@ -27,7 +27,7 @@ class EditQuestion extends React.Component {
       comment: question.comment,
       complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
-      questionAlternatives: [],
+      questionAlternatives: this.props.alternatives,
       correctRadioIndex: '',
       options: [
         { value: 'A', label: 'A', checked: false },
@@ -53,12 +53,7 @@ class EditQuestion extends React.Component {
   }
 
   filterQuestionsAlternatives() {
-    const { alternatives } = this.props
-    const questionAlternatives = alternatives.filter(
-      alternative => alternative.question_id == this.state.question.id,
-    )
-    this.setState({ questionAlternatives })
-    this.setCorrectQuestionRadio(questionAlternatives)
+    this.setCorrectQuestionRadio(this.state.questionAlternatives)
   }
 
   async setCorrectQuestionRadio(questionAlternatives) {
@@ -223,8 +218,8 @@ class EditQuestion extends React.Component {
     )
   }
 }
-const mapStateToProps = state => ({
-  alternatives: getAlternatives(state),
+const mapStateToProps = (state, ownProps) => ({
+  alternatives: getAlternatives(state, ownProps.match.params.id),
   profile: getData(state),
   questions: getQuestions(state),
 })
