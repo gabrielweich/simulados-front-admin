@@ -49,10 +49,6 @@ class EditQuestion extends React.Component {
     return matchQuestions
   }
 
-  filterQuestionsAlternatives() {
-    this.setCorrectQuestionRadio(this.state.questionAlternatives)
-  }
-
   async setCorrectQuestionRadio(questionAlternatives) {
     for (let index = 0; index < questionAlternatives.length; index++) {
       if (questionAlternatives[index].correct) {
@@ -140,6 +136,8 @@ class EditQuestion extends React.Component {
       options,
     } = this.state
 
+    const { isApproval } = this.props
+
     return (
       <div>
         <h1>Editar Questão</h1>
@@ -217,10 +215,9 @@ class EditQuestion extends React.Component {
             options={options}
           />
           <footer className="flex justify-between">
-            <Button>Salvar Questão</Button>
-            {this.verifyIfIsCordinator() && (
-              <Button onClick={this.approveQuestion}>Aprovar Questão</Button>
-            )}
+            {!isApproval && <Button>Salvar Questão</Button>}
+            {this.verifyIfIsCordinator() &&
+              isApproval && <Button>Aprovar Questão</Button>}
           </footer>
         </Form>
       </div>

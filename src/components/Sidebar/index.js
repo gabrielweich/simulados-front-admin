@@ -20,7 +20,7 @@ const routes = [
   {
     icon: '📖',
     title: 'Questões Pendentes',
-    path: '/questoes-pendentes',
+    path: '/pendingQuestions',
   },
   {
     icon: '📝',

@@ -36,8 +36,12 @@ ReactDOM.render(
               <ProtectedRoute exact path="/nova" component={CreateQuestion} />
               <ProtectedRoute path="/edit/:id" component={EditQuestion} />
               <ProtectedRoute
+                path="/approve/:id"
+                component={props => <EditQuestion {...props} isApproval />}
+              />
+              <ProtectedRoute
                 exact
-                path="/questoes-pendentes"
+                path="/pendingQuestions"
                 component={PendingQuestions}
               />
               <ProtectedRoute exact path="/" component={ListQuestions} />
