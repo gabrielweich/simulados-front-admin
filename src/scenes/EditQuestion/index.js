@@ -25,21 +25,18 @@ class EditQuestion extends React.Component {
       question: question,
       statement: question.statement,
       comment: question.comment,
+      rightAlternative: question.rightAlternative,
       complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
       questionAlternatives: this.props.alternatives,
       correctRadioIndex: '',
       options: [
-        { value: 'A', label: 'A', checked: false },
-        { value: 'B', label: 'B', checked: false },
-        { value: 'C', label: 'C', checked: false },
-        { value: 'D', label: 'D', checked: false },
+        { value: 'A', label: 'A', checked: question.rightAlternative === 'A' },
+        { value: 'B', label: 'B', checked: question.rightAlternative === 'B' },
+        { value: 'C', label: 'C', checked: question.rightAlternative === 'C' },
+        { value: 'D', label: 'D', checked: question.rightAlternative === 'D' },
       ],
     }
-  }
-
-  componentWillMount() {
-    this.filterQuestionsAlternatives()
   }
 
   getQuestion(id) {
@@ -52,26 +49,6 @@ class EditQuestion extends React.Component {
     return matchQuestions
   }
 
-  filterQuestionsAlternatives() {
-    this.setCorrectQuestionRadio(this.state.questionAlternatives)
-  }
-
-  async setCorrectQuestionRadio(questionAlternatives) {
-    for (let index = 0; index < questionAlternatives.length; index++) {
-      if (questionAlternatives[index].correct) {
-        const options = this.state.options
-        const newOptions = options.map(
-          (item, indexOp) =>
-            index === indexOp ? { ...item, checked: true } : item,
-        )
-        await this.setState({
-          options: newOptions,
-          correctRadioIndex: index,
-        })
-      }
-    }
-  }
-
   onChangeAlternative(text, index) {
     const alternatives = this.state.questionAlternatives
     alternatives[index].description = text
@@ -81,6 +58,7 @@ class EditQuestion extends React.Component {
   }
 
   setOption(label) {
+    console.log(label)
     let options = this.state.options
     let questionAlternatives = this.state.questionAlternatives
     for (let index = 0; index < options.length; index++) {
@@ -98,6 +76,7 @@ class EditQuestion extends React.Component {
     this.setState({
       options,
       questionAlternatives,
+      rightAlternative: label,
     })
   }
 
@@ -108,11 +87,13 @@ class EditQuestion extends React.Component {
       complementaryMaterial,
       questionAlternatives,
       correctRadioIndex,
+      rightAlternative,
       question,
     } = this.state
 
     const updatedQuestion = {
       id: question.id,
+      rightAlternative: rightAlternative,
       professor_id: question.professor_id,
       coordinator_id: question.coordinator_id,
       subarea_id: question.subarea_id,
@@ -123,6 +104,7 @@ class EditQuestion extends React.Component {
       studyMaterials: complementaryMaterial,
       questionAlternatives: questionAlternatives,
     }
+    console.log(updatedQuestion)
     this.props.editQuestion(updatedQuestion)
   }
   render() {

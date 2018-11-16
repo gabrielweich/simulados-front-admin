@@ -26,6 +26,7 @@ class ListQuestions extends Component {
 
   render() {
     const { questions } = this.props
+    console.log(questions)
 
     return (
       <div className="flex flex-column">
