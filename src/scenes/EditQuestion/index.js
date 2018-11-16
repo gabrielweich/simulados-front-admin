@@ -58,7 +58,6 @@ class EditQuestion extends React.Component {
   }
 
   setOption(label) {
-    console.log(label)
     let options = this.state.options
     let questionAlternatives = this.state.questionAlternatives
     for (let index = 0; index < options.length; index++) {
@@ -104,7 +103,6 @@ class EditQuestion extends React.Component {
       studyMaterials: complementaryMaterial,
       questionAlternatives: questionAlternatives,
     }
-    console.log(updatedQuestion)
     this.props.editQuestion(updatedQuestion)
   }
   render() {
