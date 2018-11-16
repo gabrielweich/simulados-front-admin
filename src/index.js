@@ -22,7 +22,7 @@ import ProtectedRoute from 'containers/ProtectedRoute'
 import CreateQuestion from 'scenes/CreateQuestion'
 import ListQuestions from 'scenes/ListQuestions'
 import EditQuestion from './scenes/EditQuestion'
-import PedingQuestions from './scenes/PendingQuestions'
+import PendingQuestions from './scenes/PendingQuestions'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -34,11 +34,11 @@ ReactDOM.render(
             <Layout>
               <Route exact path="/examples" component={Examples} />
               <ProtectedRoute exact path="/nova" component={CreateQuestion} />
-              <ProtectedRoute exact path="/edit" component={EditQuestion} />
+              <ProtectedRoute path="/edit/:id" component={EditQuestion} />
               <ProtectedRoute
                 exact
-                path="/questoespendentes"
-                component={PedingQuestions}
+                path="/questoes-pendentes"
+                component={PendingQuestions}
               />
               <ProtectedRoute exact path="/" component={ListQuestions} />
             </Layout>

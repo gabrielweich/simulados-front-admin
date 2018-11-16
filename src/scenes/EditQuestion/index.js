@@ -12,20 +12,22 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { editQuestion } from 'store/question/actions'
-import { getAlternatives } from '../../store/question'
+import { getAlternatives, getQuestions } from '../../store/question'
 
 class EditQuestion extends React.Component {
   constructor(props) {
     super(props)
 
-    const { question } = this.props.location.state
+    const { id } = props.match.params
+    const question = this.getQuestion(id)
+
     this.state = {
       question: question,
       statement: question.statement,
       comment: question.comment,
       complementaryMaterial: question.studyMaterials,
       correctAlternative: '',
-      questionAlternatives: [],
+      questionAlternatives: this.props.alternatives,
       correctRadioIndex: '',
       options: [
         { value: 'A', label: 'A', checked: false },
@@ -40,13 +42,18 @@ class EditQuestion extends React.Component {
     this.filterQuestionsAlternatives()
   }
 
+  getQuestion(id) {
+    let matchQuestions
+    this.props.questions.forEach(question => {
+      if (question.id == id) {
+        matchQuestions = question
+      }
+    })
+    return matchQuestions
+  }
+
   filterQuestionsAlternatives() {
-    const { alternatives } = this.props
-    const questionAlternatives = alternatives.filter(
-      alternative => alternative.question_id == this.state.question.id,
-    )
-    this.setState({ questionAlternatives })
-    this.setCorrectQuestionRadio(questionAlternatives)
+    this.setCorrectQuestionRadio(this.state.questionAlternatives)
   }
 
   async setCorrectQuestionRadio(questionAlternatives) {
@@ -68,6 +75,60 @@ class EditQuestion extends React.Component {
   verifyIfIsCordinator() {
     const { coordinator } = this.props.profile.data
     return !!coordinator
+  }
+
+  onChangeAlternative(text, index) {
+    const alternatives = this.state.questionAlternatives
+    alternatives[index].description = text
+    this.setState({
+      questionAlternatives: alternatives,
+    })
+  }
+
+  setOption(label) {
+    let options = this.state.options
+    let questionAlternatives = this.state.questionAlternatives
+    for (let index = 0; index < options.length; index++) {
+      if (options[index].label === label) {
+        questionAlternatives[index].correct = true
+        options[index].checked = true
+        this.setState({
+          correctRadioIndex: index,
+        })
+      } else {
+        questionAlternatives[index].correct = false
+        options[index].checked = false
+      }
+    }
+    this.setState({
+      options,
+      questionAlternatives,
+    })
+  }
+
+  onPressEditQuestion = () => {
+    const {
+      statement,
+      comment,
+      complementaryMaterial,
+      questionAlternatives,
+      correctRadioIndex,
+      question,
+    } = this.state
+
+    const updatedQuestion = {
+      id: question.id,
+      professor_id: question.professor_id,
+      coordinator_id: question.coordinator_id,
+      subarea_id: question.subarea_id,
+      approved: question.approved,
+      statement: statement,
+      correctAlternativeIndex: correctRadioIndex,
+      comment: comment,
+      studyMaterials: complementaryMaterial,
+      questionAlternatives: questionAlternatives,
+    }
+    this.props.editQuestion(updatedQuestion)
   }
 
   render() {
@@ -245,9 +306,10 @@ class EditQuestion extends React.Component {
     this.props.editQuestion(approvedQuestions)
   }
 }
-const mapStateToProps = state => ({
-  alternatives: getAlternatives(state),
+const mapStateToProps = (state, ownProps) => ({
+  alternatives: getAlternatives(state, ownProps.match.params.id),
   profile: getData(state),
+  questions: getQuestions(state),
 })
 
 export default connect(

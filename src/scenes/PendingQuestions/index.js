@@ -29,7 +29,6 @@ class PendingQuestions extends Component {
     const questions = this.props.questions.filter(
       question => question.approved == false,
     )
-    console.log()
 
     return (
       <div className="flex flex-column">
@@ -39,7 +38,7 @@ class PendingQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!questions ? (
+          {!!questions && !questions.length == 0 ? (
             <AvailableQuestions data={questions} className="flex" />
           ) : (
             <h5 className="text-center listQuestions__h5">
