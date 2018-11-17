@@ -27,6 +27,8 @@ class ListQuestions extends Component {
   render() {
     const { questions } = this.props
 
+    const approvedQuestions = questions.filter(question => question.approved)
+
     return (
       <div className="flex flex-column">
         <h1 className="flex">Lista de Questões</h1>
@@ -36,7 +38,7 @@ class ListQuestions extends Component {
         </div>
         <div className="flex flex-column">
           {!!questions && !questions.length == 0 ? (
-            <AvailableQuestions data={questions} className="flex" />
+            <AvailableQuestions data={approvedQuestions} className="flex" />
           ) : (
             <h5 className="text-center listQuestions__h5">
               Você não possui questôes para editar.
