@@ -12,9 +12,9 @@ import { getQuestions } from 'store/question'
 import { getData } from 'store/user'
 import Button from 'components/Button'
 import AvailableQuestions from 'components/AvailableQuestions'
-import './listQuestions.scss'
+import './pendingQuestions.scss'
 
-class ListQuestions extends Component {
+class PendingQuestions extends Component {
   constructor(props) {
     super(props)
   }
@@ -25,9 +25,9 @@ class ListQuestions extends Component {
   }
 
   render() {
-    const { questions } = this.props
-
-    const approvedQuestions = questions.filter(question => question.approved)
+    const questions = this.props.questions.filter(
+      question => question.approved == false,
+    )
 
     return (
       <div className="flex flex-column">
@@ -38,10 +38,10 @@ class ListQuestions extends Component {
         </div>
         <div className="flex flex-column">
           {!!questions && !questions.length == 0 ? (
-            <AvailableQuestions data={approvedQuestions} className="flex" />
+            <AvailableQuestions data={questions} className="flex" isApproval />
           ) : (
             <h5 className="text-center listQuestions__h5">
-              Você não possui questôes para editar.
+              Você não possui questôes para aprovar.
             </h5>
           )}
         </div>
@@ -65,4 +65,4 @@ export default connect(
       },
       dispatch,
     ),
-)(ListQuestions)
+)(PendingQuestions)

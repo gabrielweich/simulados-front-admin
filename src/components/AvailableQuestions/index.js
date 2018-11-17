@@ -12,8 +12,10 @@ const AvailableQuestions = props =>
   props.data.map(question => (
     <Link
       to={{
-        pathname: '/edit/' + question.id,
-        state: { question },
+        pathname: (props.isApproval ? '/approve/' : '/edit/') + question.id,
+        state: {
+          question,
+        },
       }}
     >
       <Card className="cardQuestion flex justify-between" key={question.id}>

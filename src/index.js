@@ -22,6 +22,7 @@ import ProtectedRoute from 'containers/ProtectedRoute'
 import CreateQuestion from 'scenes/CreateQuestion'
 import ListQuestions from 'scenes/ListQuestions'
 import EditQuestion from './scenes/EditQuestion'
+import PendingQuestions from './scenes/PendingQuestions'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -34,6 +35,15 @@ ReactDOM.render(
               <Route exact path="/examples" component={Examples} />
               <ProtectedRoute exact path="/nova" component={CreateQuestion} />
               <ProtectedRoute path="/edit/:id" component={EditQuestion} />
+              <ProtectedRoute
+                path="/approve/:id"
+                component={props => <EditQuestion {...props} isApproval />}
+              />
+              <ProtectedRoute
+                exact
+                path="/pendingQuestions"
+                component={PendingQuestions}
+              />
               <ProtectedRoute exact path="/" component={ListQuestions} />
             </Layout>
             <Route path="*" render={() => 404} />
