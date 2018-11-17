@@ -6,5 +6,5 @@ import questionReducer from './question'
 export default combineReducers({
   ui: uiReducer,
   question: questionReducer,
-  user: userReducer
+  user: userReducer,
 })

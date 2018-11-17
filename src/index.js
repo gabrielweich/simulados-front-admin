@@ -20,6 +20,8 @@ import Layout from 'components/Layout'
 import Login from 'scenes/Login'
 import ProtectedRoute from 'containers/ProtectedRoute'
 import CreateQuestion from 'scenes/CreateQuestion'
+import ListQuestions from 'scenes/ListQuestions'
+import EditQuestion from './scenes/EditQuestion'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -31,6 +33,8 @@ ReactDOM.render(
             <Layout>
               <Route exact path="/examples" component={Examples} />
               <ProtectedRoute exact path="/nova" component={CreateQuestion} />
+              <ProtectedRoute path="/edit/:id" component={EditQuestion} />
+              <ProtectedRoute exact path="/" component={ListQuestions} />
             </Layout>
             <Route path="*" render={() => 404} />
           </Switch>

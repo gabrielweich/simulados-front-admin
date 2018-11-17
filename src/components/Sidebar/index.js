@@ -14,8 +14,13 @@ import './sidebar.scss'
 const routes = [
   {
     icon: '📖',
-    title: 'Minhas questões',
-    path: '/minhas-questoes',
+    title: 'Lista de Questões',
+    path: '/',
+  },
+  {
+    icon: '📖',
+    title: 'Questões Pendentes',
+    path: '/questoes-pendentes',
   },
   {
     icon: '📝',
@@ -26,7 +31,7 @@ const routes = [
     icon: '👤',
     title: 'Meu perfil',
     path: '/perfil',
-  }
+  },
 ]
 const userLoggedOff = () => ({})
 
@@ -37,33 +42,34 @@ const Sidebar = ({ path = '/', open, logoff }) => (
         <Logo />
       </div>
       <nav className="sidebar__navigation">
-        {routes
-          .map(route => (
-            <Link
-              key={route.title}
-              to={route.path}
-              className={cn(
-                'sidebar-item',
-                path.startsWith(route.path)&& 'sidebar-item--active',
-                'clickable'
-              )}
-            >
-              {route.icon} {route.title}
-            </Link>
-          )
-        )}
+        {routes.map(route => (
+          <Link
+            key={route.title}
+            to={route.path}
+            className={cn(
+              'sidebar-item',
+              path === route.path && 'sidebar-item--active',
+              'clickable',
+            )}
+          >
+            {route.icon} {route.title}
+          </Link>
+        ))}
       </nav>
       <footer className="sidebar-item sidebar__footer">
         <span>usuário</span>
-        <Button size="sm" ghost onClick={logoff}>Sair</Button>
+        <Button size="sm" ghost onClick={logoff}>
+          Sair
+        </Button>
       </footer>
     </section>
   </aside>
 )
 
-export default
-  connect(
-    state => ({ path: state.router.location.pathname, open: isSidebarOpen(state) }),
-    dispatch => bindActionCreators({ logoff: userLoggedOff }, dispatch)
-  )
-(Sidebar)
+export default connect(
+  state => ({
+    path: state.router.location.pathname,
+    open: isSidebarOpen(state),
+  }),
+  dispatch => bindActionCreators({ logoff: userLoggedOff }, dispatch),
+)(Sidebar)
