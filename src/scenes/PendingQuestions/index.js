@@ -41,7 +41,7 @@ class PendingQuestions extends Component {
             <AvailableQuestions data={questions} className="flex" isApproval />
           ) : (
             <h5 className="text-center listQuestions__h5">
-              Você não possui questôes para editar.
+              Você não possui questôes para aprovar.
             </h5>
           )}
         </div>
