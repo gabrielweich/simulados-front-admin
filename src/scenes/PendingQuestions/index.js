@@ -25,7 +25,11 @@ class PendingQuestions extends Component {
   }
 
   render() {
-    const questions = this.props.questions.filter(
+    const { questions } = this.props
+
+    if (!questions) return null
+
+    const filteredQuestions = questions.filter(
       question => question.approved == false,
     )
 
@@ -37,8 +41,12 @@ class PendingQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!questions && !questions.length == 0 ? (
-            <AvailableQuestions data={questions} className="flex" isApproval />
+          {!!filteredQuestions && !filteredQuestions.length == 0 ? (
+            <AvailableQuestions
+              data={filteredQuestions}
+              className="flex"
+              isApproval
+            />
           ) : (
             <h5 className="text-center listQuestions__h5">
               Você não possui questôes para aprovar.
