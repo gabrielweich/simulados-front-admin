@@ -27,6 +27,8 @@ class ListQuestions extends Component {
   render() {
     const { questions } = this.props
 
+    if (!questions) return null
+
     const approvedQuestions = questions.filter(question => question.approved)
 
     return (
