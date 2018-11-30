@@ -9,7 +9,7 @@ const userLogout = createAction('USER_LOGOUT')
 
 const login = (email, password) => dispatch => {
   return http
-    .post('http://localhost:3000/signin', {
+    .post('http://www.hml.ages.pucrs.br:4900/signin', {
       data: {
         email: email,
         password: password,
