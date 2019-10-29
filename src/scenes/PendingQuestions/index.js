@@ -26,7 +26,7 @@ class PendingQuestions extends Component {
     if (!questions) return null
 
     const filteredQuestions = questions.filter(
-      question => question.approved == false,
+      question => question.approved === false,
     )
 
     return (
@@ -37,7 +37,7 @@ class PendingQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!filteredQuestions && !filteredQuestions.length == 0 ? (
+          {!!filteredQuestions && !filteredQuestions.length === 0 ? (
             <AvailableQuestions
               data={filteredQuestions}
               className="flex"

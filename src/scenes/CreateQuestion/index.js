@@ -95,7 +95,6 @@ class CreateQuestion extends React.Component {
           className="space-stack-l"
           label="Informar qual é a alternativa correta"
           as={RadioGroup}
-          name="radio"
           options={[
             { value: 'alternativaA', label: 'A' },
             { value: 'alternativaB', label: 'B' },

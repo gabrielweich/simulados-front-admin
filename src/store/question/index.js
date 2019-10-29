@@ -18,7 +18,7 @@ const reducer = handleActions(
 export const getQuestions = state => state.question.data.questions
 export const getAlternatives = (state, id) =>
   state.question.data.alternatives.filter(
-    alternative => alternative.question_id == id,
+    alternative => alternative.question_id === id,
   )
 
 export default reducer

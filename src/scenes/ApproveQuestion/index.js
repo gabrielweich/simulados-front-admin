@@ -140,7 +140,6 @@ class ApproveQuestion extends React.Component {
             className="space-stack-l"
             label="Alternativa correta:"
             as={RadioGroup}
-            name="radio"
             options={options}
           />
           <footer className="flex justify-between">

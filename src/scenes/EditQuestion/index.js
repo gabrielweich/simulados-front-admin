@@ -40,7 +40,7 @@ class EditQuestion extends React.Component {
   getQuestion(id) {
     let matchQuestions
     this.props.questions.forEach(question => {
-      if (question.id == id) {
+      if (question.id === id) {
         matchQuestions = question
       }
     })
