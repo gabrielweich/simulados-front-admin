@@ -4,11 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { growl } from 'store/ui/actions'
-import {
-  GROWL_INFO,
-  GROWL_ERROR,
-  GROWL_SUCCESS,
-} from 'store/ui/constants'
+import { GROWL_ERROR, GROWL_SUCCESS } from 'store/ui/constants'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
@@ -25,9 +21,7 @@ const Example = ({ title, children }) => (
   <div className="example">
     <h2>{title}</h2>
     <hr />
-    <div className="example__content">
-      {children}
-    </div>
+    <div className="example__content">{children}</div>
   </div>
 )
 
@@ -55,33 +49,16 @@ class Examples extends React.Component {
             &nbsp;&nbsp;
           </Example>
           <Example title="Text Inputs">
-            <Input
-              placeholder="Placeholder"
-            />
-            <Input
-              icon="book-open"
-              placeholder="With icon"
-            />
-            <Input
-              type="search"
-              placeholder="[type=search]"
-            />
-            <Input
-              block
-              placeholder="Block input"
-            />
+            <Input placeholder="Placeholder" />
+            <Input icon="book-open" placeholder="With icon" />
+            <Input type="search" placeholder="[type=search]" />
+            <Input block placeholder="Block input" />
             <div>
-              <Input
-                as="textarea"
-                placeholder="Textarea"
-              />
+              <Input as="textarea" placeholder="Textarea" />
             </div>
           </Example>
           <Example title="Fields">
-            <Field
-              id="field1"
-              label="A neat little label"
-            />
+            <Field id="field1" label="A neat little label" />
             <Field
               id="field2"
               label="Another neat little label"
@@ -107,8 +84,15 @@ class Examples extends React.Component {
           </Example>
           <Example title="Card">
             <Card>
-              <p>Card with some text.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <p>
+                Card with some text. Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
               </p>
             </Card>
           </Example>
@@ -116,21 +100,41 @@ class Examples extends React.Component {
             <Button onClick={() => this.setState({ modalOpen: true })}>
               Open modal
             </Button>
-            <Modal onClose={() => this.setState({ modalOpen: false })} open={this.state.modalOpen}>
-             <h3>Modal example</h3>
-             <p>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-             </p>
-           </Modal>
+            <Modal
+              onClose={() => this.setState({ modalOpen: false })}
+              open={this.state.modalOpen}
+            >
+              <h3>Modal example</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </Modal>
           </Example>
           <Example title="Growl">
             <Button onClick={() => this.props.growl('Something happened!')}>
               Show growl
             </Button>
-            <Button onClick={() => this.props.growl('Something successfully happened!', GROWL_SUCCESS)}>
+            <Button
+              onClick={() =>
+                this.props.growl(
+                  'Something successfully happened!',
+                  GROWL_SUCCESS,
+                )
+              }
+            >
               Show success growl
             </Button>
-            <Button onClick={() => this.props.growl('Something wrong happened!', GROWL_ERROR)}>
+            <Button
+              onClick={() =>
+                this.props.growl('Something wrong happened!', GROWL_ERROR)
+              }
+            >
               Show error growl
             </Button>
           </Example>
@@ -140,8 +144,13 @@ class Examples extends React.Component {
   }
 }
 
-export default connect(null,
-  dispatch => bindActionCreators({
-    growl,
-  }, dispatch)
+export default connect(
+  null,
+  dispatch =>
+    bindActionCreators(
+      {
+        growl,
+      },
+      dispatch,
+    ),
 )(Examples)

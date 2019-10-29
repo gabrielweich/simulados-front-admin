@@ -1,8 +1,6 @@
 import React from 'react'
-import Container from 'components/Container'
-import Card from 'components/Card'
 import Field from 'components/Field'
-import Input, { TextArea } from 'components/Input'
+import { TextArea } from 'components/Input'
 import Button from 'components/Button'
 import RadioGroup from 'components/RadioGroup'
 import Form from 'components/Form'
@@ -211,7 +209,6 @@ class EditQuestion extends React.Component {
             className="space-stack-l"
             label="Alternativa correta:"
             as={RadioGroup}
-            name="radio"
             options={options}
           />
           <footer className="flex justify-between">

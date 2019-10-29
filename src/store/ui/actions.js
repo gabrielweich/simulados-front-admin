@@ -1,4 +1,3 @@
-import { delay } from 'redux-saga'
 import { createAction } from 'redux-actions'
 
 import * as constants from './constants'
@@ -21,11 +20,7 @@ const growl = (text, type = constants.GROWL_INFO) => dispatch => {
   }
 
   dispatch(growlAdded(message))
-  setTimeout(
-    () => dispatch(
-      growlRemoved(message)
-    ), 1000 * 5
-  )
+  setTimeout(() => dispatch(growlRemoved(message)), 1000 * 5)
 }
 
 export {
