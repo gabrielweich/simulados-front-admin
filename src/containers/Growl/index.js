@@ -1,18 +1,15 @@
 import React from 'react'
 import cn from 'classnames'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { getGrowls } from 'store/ui'
-import {
-  GROWL_ERROR,
-  GROWL_SUCCESS,
-} from 'store/ui/constants'
+import { GROWL_ERROR, GROWL_SUCCESS } from 'store/ui/constants'
 
 import './growl.scss'
 
 const GrowlMessage = ({ message, type, hidden }) => (
-  <li className={cn(
+  <li
+    className={cn(
       'growl',
       hidden && 'growl--hidden',
       type === GROWL_ERROR && 'growl--error',
@@ -25,12 +22,10 @@ const GrowlMessage = ({ message, type, hidden }) => (
 
 const Growl = ({ messages }) => (
   <ul className="growl-list">
-    {messages.map(
-      msg => <GrowlMessage key={msg.id} {...msg} />
-    )}
+    {messages.map(msg => (
+      <GrowlMessage key={msg.id} {...msg} />
+    ))}
   </ul>
 )
 
-export default connect(
-  state => ({ messages: getGrowls(state) }),
-)(Growl)
+export default connect(state => ({ messages: getGrowls(state) }))(Growl)

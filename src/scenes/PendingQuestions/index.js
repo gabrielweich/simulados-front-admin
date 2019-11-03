@@ -3,14 +3,10 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
-import Card from 'components/Card'
-
-import { growl } from 'store/ui/actions'
 
 import { fetchQuestions } from 'store/question/actions'
 import { getQuestions } from 'store/question'
 import { getData } from 'store/user'
-import Button from 'components/Button'
 import AvailableQuestions from 'components/AvailableQuestions'
 import './pendingQuestions.scss'
 
@@ -41,7 +37,7 @@ class PendingQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!filteredQuestions && !filteredQuestions.length == 0 ? (
+          {!!filteredQuestions && !filteredQuestions.length === 0 ? (
             <AvailableQuestions
               data={filteredQuestions}
               className="flex"

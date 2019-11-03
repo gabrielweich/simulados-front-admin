@@ -1,7 +1,4 @@
 import React from 'react'
-import { push } from 'connected-react-router'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Card from 'components/Card'

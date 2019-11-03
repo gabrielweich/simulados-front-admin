@@ -1,8 +1,6 @@
 import React from 'react'
-import Container from 'components/Container'
-import Card from 'components/Card'
 import Field from 'components/Field'
-import Input, { TextArea } from 'components/Input'
+import { TextArea } from 'components/Input'
 import Button from 'components/Button'
 import RadioGroup from 'components/RadioGroup'
 
@@ -106,7 +104,6 @@ class CreateQuestion extends React.Component {
           className="space-stack-l"
           label="Informar qual é a alternativa correta"
           as={RadioGroup}
-          name="radio"
           options={[
             { value: 'A', label: 'A' },
             { value: 'B', label: 'B' },
