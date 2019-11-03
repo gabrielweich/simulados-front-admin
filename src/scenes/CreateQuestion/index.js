@@ -21,13 +21,22 @@ class CreateQuestion extends React.Component {
       alternativeC: '',
       alternativeD: '',
       comment: '',
-      complementaryMaterial: '',
-      correctAlternative: '',
+      studyMaterials: '',
+      right_alternative: '',
     }
+  }
+
+  saveQuestion = async () => {
+    await this.props.saveQuestion(this.state)
+    this.props.history.push('/')
   }
 
   handleFormChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleAlternativeChange = event => {
+    this.setState({ right_alternative: event.target.id })
   }
 
   render() {
@@ -83,32 +92,30 @@ class CreateQuestion extends React.Component {
           as={TextArea}
         />
         <Field
-          id="complementaryMaterial"
-          value={this.state.complementaryMaterial}
+          id="studyMaterials"
+          value={this.state.studyMaterials}
           onChange={this.handleFormChange}
-          name="complementaryMaterial"
+          name="studyMaterials"
           label="Material Complementar"
         />
         <Field
-          id="correctAlternative"
-          value={this.state.correctAlternative}
-          onChange={this.handleFormChange}
-          name="correctAlternative"
+          id="right_alternative"
+          value={this.state.right_alternative}
+          onChange={this.handleAlternativeChange}
+          name="right_alternative"
           className="space-stack-l"
           label="Informar qual é a alternativa correta"
           as={RadioGroup}
           name="radio"
           options={[
-            { value: 'alternativaA', label: 'A' },
-            { value: 'alternativaB', label: 'B' },
-            { value: 'alternativaC', label: 'C' },
-            { value: 'alternativaD', label: 'D' },
+            { value: 'A', label: 'A' },
+            { value: 'B', label: 'B' },
+            { value: 'C', label: 'C' },
+            { value: 'D', label: 'D' },
           ]}
         />
         <footer className="flex justify-end">
-          <Button onClick={() => this.props.saveQuestion(this.state)}>
-            Salvar questão
-          </Button>
+          <Button onClick={this.saveQuestion}>Salvar questão</Button>
         </footer>
       </div>
     )

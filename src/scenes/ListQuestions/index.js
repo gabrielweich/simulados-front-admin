@@ -26,10 +26,10 @@ class ListQuestions extends Component {
 
   render() {
     const { questions } = this.props
-
+    // console.log(questions)
     if (!questions) return null
 
-    const approvedQuestions = questions.filter(question => question.approved)
+    const approvedQuestions = questions
 
     return (
       <div className="flex flex-column">

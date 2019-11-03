@@ -15,6 +15,7 @@ const Input = ({
   className,
   maxLength,
   required,
+  ...rest
 }) => (
   <T
     className={cn(
@@ -28,6 +29,7 @@ const Input = ({
     type={type}
     maxLength={maxLength}
     required={required}
+    {...rest}
   />
 )
 

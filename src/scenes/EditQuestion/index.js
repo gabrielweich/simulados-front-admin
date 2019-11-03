@@ -20,7 +20,7 @@ class EditQuestion extends React.Component {
 
     const { id } = props.match.params
     const question = this.getQuestion(id)
-
+    console.log(question)
     this.state = {
       question: question,
       statement: question.statement,
@@ -31,10 +31,10 @@ class EditQuestion extends React.Component {
       questionAlternatives: this.props.alternatives,
       correctRadioIndex: '',
       options: [
-        { value: 'A', label: 'A', checked: question.rightAlternative === 'A' },
-        { value: 'B', label: 'B', checked: question.rightAlternative === 'B' },
-        { value: 'C', label: 'C', checked: question.rightAlternative === 'C' },
-        { value: 'D', label: 'D', checked: question.rightAlternative === 'D' },
+        { value: 'A', label: 'A', checked: question.right_alternative === 'A' },
+        { value: 'B', label: 'B', checked: question.right_alternative === 'B' },
+        { value: 'C', label: 'C', checked: question.right_alternative === 'C' },
+        { value: 'D', label: 'D', checked: question.right_alternative === 'D' },
       ],
     }
   }

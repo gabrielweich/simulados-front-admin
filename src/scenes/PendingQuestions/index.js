@@ -26,11 +26,11 @@ class PendingQuestions extends Component {
 
   render() {
     const { questions } = this.props
-
+    console.log(this.props.questions)
     if (!questions) return null
 
     const filteredQuestions = questions.filter(
-      question => question.approved == false,
+      question => question.approved === false,
     )
 
     return (
