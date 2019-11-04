@@ -18,7 +18,7 @@ class EditQuestion extends React.Component {
 
     const { id } = props.match.params
     const question = this.getQuestion(id)
-    console.log(question)
+    console.log({ question })
     this.state = {
       question: question,
       statement: question.statement,
@@ -38,12 +38,16 @@ class EditQuestion extends React.Component {
   }
 
   getQuestion(id) {
+    console.log({ id })
+    console.log('quest', this.props)
     let matchQuestions
     this.props.questions.forEach(question => {
-      if (question.id === id) {
+      if (question.id === parseInt(id)) {
         matchQuestions = question
       }
     })
+
+    console.log({ matchQuestions })
     return matchQuestions
   }
 
@@ -133,6 +137,8 @@ class EditQuestion extends React.Component {
       complementaryMaterial,
       options,
     } = this.state
+
+    console.log('qalternatives: ', questionAlternatives)
 
     const { isApproval } = this.props
 

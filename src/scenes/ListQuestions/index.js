@@ -22,6 +22,7 @@ class ListQuestions extends Component {
 
   render() {
     const { questions } = this.props
+    console.log(questions)
     // console.log(questions)
     if (!questions) return null
 
@@ -35,7 +36,7 @@ class ListQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!questions && !questions.length === 0 ? (
+          {questions && questions.length ? (
             <AvailableQuestions data={approvedQuestions} className="flex" />
           ) : (
             <h5 className="text-center listQuestions__h5">

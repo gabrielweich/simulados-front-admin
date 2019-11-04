@@ -37,7 +37,7 @@ class PendingQuestions extends Component {
           <h6 className="listQuestions__h6">Data de criação</h6>
         </div>
         <div className="flex flex-column">
-          {!!filteredQuestions && !filteredQuestions.length === 0 ? (
+          {filteredQuestions && filteredQuestions.length ? (
             <AvailableQuestions
               data={filteredQuestions}
               className="flex"
